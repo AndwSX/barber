@@ -42,7 +42,9 @@ class Router {
             //Si no coincide con ninguno de los demas mostrara eso de no encontrada
             default:
                 http_response_code(404);
-                echo "Página no encontrada";
+                echo "Página no encontrada router";
+                echo $mainRoute;
+                echo $subRoute;
                 break;
         }
     }

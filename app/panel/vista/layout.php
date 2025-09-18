@@ -18,7 +18,7 @@
     <hr class="border-warning">
     <a href="/barber/panel/dashboard" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-chart-pie me-2"></i>Dashboard</a>
     <a href="/barber/panel/clientes" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-users me-2"></i>Clientes</a>
-    <a href="/barber/panel/barberos" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-cut me-2"></i>Barberos</a>
+    <a href="/barber/panel/empleados" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-cut me-2"></i>Barberos</a>
     <a href="/barber/panel/promociones" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-tags me-2"></i>Promociones</a>
     <a href="/barber/panel/citas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
 
@@ -39,6 +39,24 @@
           case "clientes":
               require_once __DIR__ . "/../../modulos/clientes/controlador.php";
               $controller = new \App\Modulos\ClientesController();
+              $controller->index();
+              break;
+            
+          case "empleados":
+              require_once __DIR__ . "/../../modulos/barberos/controlador.php";
+              $controller = new \App\Modulos\BarberosController();
+              $controller->index();
+              break;
+            
+          case "promociones":
+              require_once __DIR__ . "/../../modulos/promociones/controlador.php";
+              $controller = new \App\Modulos\PromocionesController();
+              $controller->index();
+              break;
+
+          case "citas":
+              require_once __DIR__ . "/../../modulos/citas/controlador.php";
+              $controller = new \App\Modulos\CitasController();
               $controller->index();
               break;
 

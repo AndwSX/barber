@@ -71,7 +71,7 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="/Agrupadoresjs/Gestion-clientes.js"></script>
+  <script src="/Agrupadoresjs/Gestion-clientes.js"></script> <!-- Esto no sirve de nada -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
