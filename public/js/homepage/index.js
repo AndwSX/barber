@@ -48,7 +48,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const res = await fetch("/barber/auth/login", {
+    const res = await fetch("/barber/auth-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ correo, password }),

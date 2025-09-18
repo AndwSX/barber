@@ -37,7 +37,9 @@
               break;
 
           case "clientes":
-              require_once __DIR__ . "/vista/clientes.php";
+              require_once __DIR__ . "/../../modulos/clientes/controlador.php";
+              $controller = new \App\Modulos\ClientesController();
+              $controller->index();
               break;
 
           default:
