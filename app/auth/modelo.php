@@ -1,7 +1,7 @@
 <?php
 namespace App\Auth;
 
-require_once __DIR__ . "/../config/Database.php"; // ✅ subir un nivel hasta /config/
+require_once __DIR__ . "/../config/Database.php"; //subir un nivel hasta /config/
 
 use App\Config\Database;
 

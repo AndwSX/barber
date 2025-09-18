@@ -1,7 +1,7 @@
 <?php
 namespace App\Auth;
 
-require_once __DIR__ . "/modelo.php"; // ✅ aseguramos que el modelo exista
+require_once __DIR__ . "/modelo.php"; // aseguramos que el modelo exista
 
 class AuthController {
     public function login(): void {
