@@ -7,32 +7,32 @@ document.querySelector('.btn-back')?.addEventListener('click', () => {
 // Cancelar todo y volver al inicio
 document.querySelector('.btn-cancel')?.addEventListener('click', () => {
   localStorage.removeItem('serviciosSeleccionados');
-  window.location.href = 'index2.0.html';
+  window.location.href = '/barber/';
 });
 
-      //saber en que seccion estoy
-       document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
+//saber en que seccion estoy
+document.addEventListener('DOMContentLoaded', () => {
 
-    const secciones = [
-      { archivo: 'servicios.html', texto: 'Servicios' },
-      { archivo: 'equipo.html', texto: 'Equipo' },
-      { archivo: 'horario.html', texto: 'Horario' },
-      { archivo: 'confirmar.html', texto: 'Confirmar' },
-    ];
+  const secciones = [
+    { ruta: '/barber/agendar-cita/servicios', texto: 'Servicios' },
+    { ruta: '/barber/agendar-cita/equipo', texto: 'Equipo' },
+    { ruta: '/barber/agendar-cita/horario', texto: 'Horario' },
+    { ruta: '/barber/agendar-cita/confirmar', texto: 'Confirmar' },
+  ];
 
-    const breadcrumbSpans = document.querySelectorAll('.breadcrumb span');
+  const path = window.location.pathname;
+  const breadcrumbSpans = document.querySelectorAll('.breadcrumb span');
 
-    secciones.forEach(seccion => {
-      if (path.includes(seccion.archivo)) {
-        breadcrumbSpans.forEach(span => {
-          if (span.textContent.trim() === seccion.texto) {
-            span.classList.add('active');
-          }
-        });
-      }
-    });
+  secciones.forEach(seccion => {
+    if (path === seccion.ruta) {
+      breadcrumbSpans.forEach(span => {
+        if (span.textContent.trim() === seccion.texto) {
+          span.classList.add('active');
+        }
+      });
+    }
   });
+});
 
   //barbero seleccionado
 function actualizarBotonContinuarBarbero() {
@@ -89,7 +89,6 @@ function seleccionarBarbero(card) {
   actualizarBotonContinuarBarbero();
 
 }
- 
 
 
 //recupera los servicios desdeel local al cargar la pagina
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btn = document.querySelector('.btn-continue');
   btn.addEventListener('click', () => {
-    window.location.href = 'horarios.html';
+    window.location.href = 'horario';
   });
 });
 

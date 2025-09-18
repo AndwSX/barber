@@ -1,12 +1,13 @@
-# Activar reescritura
 RewriteEngine On
+RewriteBase /barber/
 
-# Base del proyecto (si está en htdocs directamente no necesitas esto)
-RewriteBase /tu-proyecto/
+# No redirigir si es un archivo en /public
+RewriteCond %{REQUEST_URI} ^/barber/public/.*$ [NC]
+RewriteRule .* - [L]
 
-# Ignorar archivos y carpetas reales
+# Ignorar archivos/carpetas reales
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Redirigir todo a index.php
+# Redirigir todo lo demás a index.php
 RewriteRule ^(.*)$ index.php [QSA,L]

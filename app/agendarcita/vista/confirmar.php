@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-     <link rel="icon"  type="image/png" href="/imagenes/logo.jpg">
+    <link rel="stylesheet" href="/barber/public/css/agendarCita.css">
+     <link rel="icon"  type="image/png" href="/barber/public/imagenes/logo.jpg">
     <title>Confirmar Reserva</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div class="container">
         <nav class="navbar">
   <div class="top-action">
-    <img src="/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
+    <img src="/barber/public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
     <span class="warning-title">Style Barber</span> 
     <button class="btn-icon btn-back" title="Volver">←</button>
     <button class="btn-icon btn-cancel" title="Cancelar y volver al inicio">✕</button>
@@ -81,7 +81,7 @@
 
 <aside class="sumary">
         <div class="shop-info">
-            <img src="/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
+            <img src="/barber/public/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
         </div>
         <strong class="warning-title">Style Barber</strong>
         <p>carrera 59#129b-32</p>
@@ -111,6 +111,6 @@
       </div>
 
     </aside>
-    <script src="/javahome/confirmar.js"> </script>
+    <script src="/barber/public/js/agendarCita/confirmar.js"> </script>
 </body>
 </html>

@@ -40,35 +40,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-   document.getElementById('loginForm').addEventListener('submit', function (e) {
-  e.preventDefault(); 
 
-  // Usuario y contraseña permitidos
-  const ADMIN_EMAIL = "nominasena793@gmail.com";
-  const ADMIN_PASSWORD = "Lascanelitas2025";
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  // Tomamos los valores del formulario
-  const email = document.getElementById('emailLogin').value;
-  const password = document.getElementById('passwordLogin').value;
+  const correo = document.getElementById("correo").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    // Acceso correcto
-    window.location.href = '/dashboard/Administrador.html'; 
-  } else {
-    // Acceso incorrecto
-    // Abrir el modal de login si no está abierto
-    const loginModalEl = document.getElementById('loginModal');
-    const bsModal = new bootstrap.Modal(loginModalEl);
-    bsModal.show();
+  try {
+    const res = await fetch("/barber/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo, password }),
+    });
 
-    // Crear alerta solo si no existe ya
-    const body = document.querySelector('#loginModal .modal-body');
-    if(!document.querySelector('#loginModal .alert')) {
-      const alert = document.createElement('div');
-      alert.className = 'alert alert-danger';
-      alert.textContent = 'Correo o contraseña incorrectos';
-      body.prepend(alert);
+    // ✅ Leer respuesta cruda
+    const rawText = await res.text();
+    console.log("🔎 Respuesta cruda del servidor:", rawText);
+
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (err) {
+      console.error("⚠️ Error al parsear JSON:", err);
+      alert("El servidor no devolvió un JSON válido");
+      return;
     }
+
+    if (data.success) {
+      alert("✅ Bienvenido " + data.usuario.nombre);
+      localStorage.setItem("usuario", JSON.stringify(data.usuario));
+      window.location.href = "dashboard";
+    } else {
+      alert("❌ " + data.message);
+    }
+  } catch (err) {
+    console.error("🚨 Error en login:", err);
+    alert("Error al conectar con el servidor");
   }
 });
 

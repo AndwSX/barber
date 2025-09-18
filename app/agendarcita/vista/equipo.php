@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar servicios - Barberia</title>
-    <link rel="stylesheet" href="styles.css">
-     <link rel="icon"  type="image/png" href="/imagenes/logo.jpg">
+    <link rel="stylesheet" href="/barber/public/css/agendarCita.css">
+     <link rel="icon"  type="image/png" href="/barber/public/imagenes/logo.jpg">
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
   <div class="top-action">
-    <img src="/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
+    <img src="/barber/public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
     <span class="warning-title">Style Barber</span> 
     <button class="btn-icon btn-back" title="Volver">←</button>
     <button class="btn-icon btn-cancel" title="Cancelar y volver al inicio">✕</button>
@@ -29,28 +29,28 @@
       
 
         <div class="barbers-container">
-          <div class="barber-card" onclick="seleccionarBarbero(this)" data-nombre="mayor disponibilidad" data-rating="5.0" data-foto="/imagenes/aleatorio.jpg">
-            <img src="/imagenes/aleatorio.jpg" alt="Cualquier profesional" class="baber-photo shuffle-icon">
+          <div class="barber-card" onclick="seleccionarBarbero(this)" data-nombre="mayor disponibilidad" data-rating="5.0" data-foto="/barber/public/imagenes/aleatorio.jpg">
+            <img src="/barber/public/imagenes/aleatorio.jpg" alt="Cualquier profesional" class="baber-photo shuffle-icon">
             <h3>Cualquier Profesional</h3>
             <p class="barber-role">Maxima disponibilidad</p>
           </div>
                
-            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Carlos Perez" data-rating="5.0" data-foto="/imagenes/barbero new.png">
-              <img src="/imagenes/barbero new.png " alt="Carlos" class="barber-photo">
+            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Carlos Perez" data-rating="5.0" data-foto="/barber/public/imagenes/barbero new.png">
+              <img src="/barber/public/imagenes/barbero new.png " alt="Carlos" class="barber-photo">
               <div class="barber-rating">⭐ 5.0</div>
               <h3>Carlos Perez</h3>
               <p class="barber-role">Barbero Profesional</p>
             </div>
 
-            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Andres Diaz"  data-rating="5.0" data-foto="/imagenes/barbero new2.jpg">
-              <img src="/imagenes/barbero new2.jpg" alt="Andres" class="barber-photo">
+            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Andres Diaz"  data-rating="5.0" data-foto="/barber/public/imagenes/barbero new2.jpg">
+              <img src="/barber/public/imagenes/barbero new2.jpg" alt="Andres" class="barber-photo">
               <div class="barber-rating">⭐ 5.0</div>
               <h3>Andres Diaz</h3>
               <p class="barber-role">Barbero Profesional</p>
             </div>
 
-             <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Jose Penagos"  data-rating="5.0" data-foto="/imagenes/barbero new3.jpg">
-              <img src="/imagenes/barbero new3.jpg " alt="Jose" class="barber-photo">
+             <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Jose Penagos"  data-rating="5.0" data-foto="/barber/public/imagenes/barbero new3.jpg">
+              <img src="/barber/public/imagenes/barbero new3.jpg " alt="Jose" class="barber-photo">
               <div class="barber-rating">⭐ 5.0</div>
               <h3>Jose Penagos</h3>
               <p class="barber-role">Barbero Profesional</p>
@@ -61,7 +61,7 @@
     
     <aside class="sumary">
         <div class="shop-info">
-            <img src="/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
+            <img src="/barber/public/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
         </div>
         <strong class="warning-title">Style Barber</strong>
         <p>carrera 59#129b-32</p>
@@ -85,6 +85,6 @@
 
       <button class="btn-continue"disabled>Continuar</button>
     </aside>
- <script src="/javahome/equipo.js"></script>
+ <script src="/barber/public/js/agendarCita/equipo.js"></script>
 </body>
 </html>

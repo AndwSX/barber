@@ -5,34 +5,32 @@
 // Cancelar todo y volver al inicio
 document.querySelector('.btn-cancel')?.addEventListener('click', () => {
   localStorage.removeItem('serviciosSeleccionados');
-  window.location.href = 'index2.0.html';
+  window.location.href = '/barber/';
 });
-    //saber en que seccion estoy
-       document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
 
-    const secciones = [
-      { archivo: 'servicios.html', texto: 'Servicios' },
-      { archivo: 'equipo.html', texto: 'Equipo' },
-      { archivo: 'horarios.html', texto: 'Horario' },
-      { archivo: 'confirmar.html', texto: 'Confirmar' },
-    ];
+//saber en que seccion estoy
+document.addEventListener('DOMContentLoaded', () => {
 
-    const breadcrumbSpans = document.querySelectorAll('.breadcrumb span');
+  const secciones = [
+    { ruta: '/barber/agendar-cita/servicios', texto: 'Servicios' },
+    { ruta: '/barber/agendar-cita/equipo', texto: 'Equipo' },
+    { ruta: '/barber/agendar-cita/horario', texto: 'Horario' },
+    { ruta: '/barber/agendar-cita/confirmar', texto: 'Confirmar' },
+  ];
 
-    secciones.forEach(seccion => {
-      if (path.includes(seccion.archivo)) {
-        breadcrumbSpans.forEach(span => {
-          if (span.textContent.trim() === seccion.texto) {
-            span.classList.add('active');
-          }
-        });
-      }
-    });
+  const path = window.location.pathname;
+  const breadcrumbSpans = document.querySelectorAll('.breadcrumb span');
+
+  secciones.forEach(seccion => {
+    if (path === seccion.ruta) {
+      breadcrumbSpans.forEach(span => {
+        if (span.textContent.trim() === seccion.texto) {
+          span.classList.add('active');
+        }
+      });
+    }
   });
-
- 
-
+});
 
 //2.0
 
@@ -130,7 +128,7 @@ function manejarFormulario() {
     // ✅ Redirigir al home después de 4 segundos
     setTimeout(() => {
       mensajeExito.style.display = 'none';
-      window.location.href = 'index2.0.html';
+      window.location.href = '/barber/';
     }, 4000);
   });
 }
@@ -158,7 +156,7 @@ document.getElementById("form-confirmacion").addEventListener("submit", async fu
   const data = { nombre, correo, pais, telefono, fecha, hora, servicio };
 
   try {
-    const res = await fetch("http://localhost:5000/reservar", {
+    const res = await fetch("/barber/agendar-cita/guardar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
