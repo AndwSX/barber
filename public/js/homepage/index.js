@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
+//Login de inicio de sesion
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -54,7 +54,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       body: JSON.stringify({ correo, password }),
     });
 
-    // ✅ Leer respuesta cruda
+    // Leer respuesta cruda
     const rawText = await res.text();
     console.log("🔎 Respuesta cruda del servidor:", rawText);
 
@@ -68,14 +68,14 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     }
 
     if (data.success) {
-      alert("✅ Bienvenido " + data.usuario.nombre);
+      alert("Bienvenido " + data.usuario.nombre);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
-      window.location.href = "dashboard";
+      window.location.href = "panel";
     } else {
       alert("❌ " + data.message);
     }
   } catch (err) {
-    console.error("🚨 Error en login:", err);
+    console.error("Error en login:", err);
     alert("Error al conectar con el servidor");
   }
 });

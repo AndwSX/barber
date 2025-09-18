@@ -88,6 +88,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Archivo JS separado -->
-    <script src="/Agrupadoresjs/Grafica.js"></script>
+    <script src="/barber/public/js/dashboard/grafica.js"></script>
 </body>
 </html>

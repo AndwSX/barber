@@ -3,7 +3,12 @@ namespace App;
 
 class Router {
     public function handle(string $route): void {
-        switch ($route) {
+        // Dividir la ruta en partes
+        $segments = explode("/", trim($route, "/"));
+        $mainRoute = $segments[0] ?? "";   // ejemplo: "panel"
+        $subRoute  = $segments[1] ?? "dashboard";   // ejemplo: "dashboard"
+
+        switch ($mainRoute) {
             //Por defecto "" trae la vista del homepage
             case "":
                 require_once __DIR__ . "/home/controlador.php";
@@ -48,14 +53,15 @@ class Router {
                 $controller = new \App\Auth\AuthController();
                 $controller->login();
                 break;
+
             //Panel administrativo
-            case "dashboard":
-                require_once __DIR__ . "/dashboard/controlador.php";
-                $controller = new \App\Dashboard\DashboardController();
-                $controller->index();
+            case "panel":
+                require_once __DIR__ . "/panel/controlador.php";
+                $controller = new \App\Panel\PanelController();
+                $controller->index($subRoute);
                 break;
 
-            
+
 
             //Si no coincide con ninguno de los demas mostrara eso de no encontrada
             default:

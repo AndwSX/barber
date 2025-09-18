@@ -1,8 +1,8 @@
 <?php
-namespace App\Dashboard;
+namespace App\Modulos;
 
 class DashboardController {
     public function index(): void {
-        require __DIR__ . "/vista/administrador.php";
+        require_once __DIR__ . "/vista/grafica.php";
     }
 }
