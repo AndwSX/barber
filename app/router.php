@@ -7,6 +7,8 @@ class Router {
         $segments = explode("/", trim($route, "/"));
         $mainRoute = $segments[0] ?? "";   // ejemplo: "panel"
         $subRoute  = $segments[1] ?? "dashboard";   // ejemplo: "dashboard"
+        $id = $segments[2] ?? "";
+        $accion = $segments[3] ?? "";
 
         switch ($mainRoute) {
             //Por defecto "" trae la vista del homepage
@@ -34,7 +36,7 @@ class Router {
             case "panel":
                 require_once __DIR__ . "/panel/controlador.php";
                 $controller = new \App\Panel\PanelController();
-                $controller->index($subRoute);
+                $controller->index($subRoute, $id, $accion);
                 break;
 
 

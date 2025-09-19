@@ -18,7 +18,7 @@ class Empleado {
     // Crear empleado
     public function crear(array $data): bool {
         $sql = "INSERT INTO {$this->table} 
-                (nombre, correo, contrasena, especialidad, telefono, estado)
+                (nombre, correo, password, especialidad, telefono, estado)
                 VALUES (:nombre, :correo, :contrasena, :especialidad, :telefono, :estado)";
 
         $stmt = $this->conn->prepare($sql);

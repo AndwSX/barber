@@ -30,7 +30,7 @@
   <div class="p-4 flex-fill" id="main-content">
       <?php
 
-      switch ($sub) {
+      switch ($modulo) {
           case "dashboard":
               require_once __DIR__ . "/../../modulos/dashboard/controlador.php";
               $controller = new \App\Modulos\DashboardController();
@@ -46,7 +46,16 @@
           case "empleados":
               require_once __DIR__ . "/../../modulos/barberos/controlador.php";
               $controller = new \App\Modulos\BarberosController();
-              $controller->index();
+
+              if ($id && $action === "editar") {
+                  $controller->editar((int)$id);
+              } elseif ($id && $action === "eliminar") {
+                  $controller->eliminar((int)$id);
+              } elseif ($id === "crear") {
+                  $controller->crear();
+              } else {
+                  $controller->index();
+              }
               break;
             
           case "promociones":

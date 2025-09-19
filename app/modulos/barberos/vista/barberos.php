@@ -1,53 +1,63 @@
-<div class="container">
+<div class="container mt-4">
   <h2 class="mb-4 text-warning text-center">
     <i class="fas fa-scissors me-2"></i> Gestión de Barberos
   </h2>
 
+  <?php if (isset($_GET['mensaje'])): ?>
+    <div class="alert alert-info"><?= htmlspecialchars($_GET['mensaje']) ?></div>
+  <?php endif; ?>
+
+  <?php if (!empty($error)): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+  <?php endif; ?>
+
   <div class="card bg-dark border-warning mb-4">
     <div class="card-body">
-      <form id="barberoForm">
-        <input type="hidden" id="editIndex">
+      <form method="POST" action="<?= $action === 'editar' 
+                          ? "/barber/panel/empleados/$idEmpleado/editar" 
+                          : "/barber/panel/empleados/crear" ?>">
+         <input type="hidden" name="id_empleado" value="<?= $idEmpleado ?? '' ?>">
 
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label text-warning">Nombre completo</label>
-            <input type="text" class="form-control bg-dark text-white border-warning" id="nombre" required>
+            <input type="text" class="form-control bg-dark text-white border-warning" name="nombre" required value="<?= htmlspecialchars($empleadoData["nombre"] ?? '') ?>">
           </div>
+          <div class="col-md-6">
+            <label class="form-label text-warning">Correo</label>
+            <input type="email" class="form-control bg-dark text-white border-warning" name="correo" required value="<?= htmlspecialchars($empleadoData["correo"] ?? '') ?>">
+          </div>
+
           <div class="col-md-6">
             <label class="form-label text-warning">Especialidad</label>
-            <input type="text" class="form-control bg-dark text-white border-warning" id="especialidad" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label text-warning">Teléfono</label>
-            <input type="text" class="form-control bg-dark text-white border-warning" id="telefono" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label text-warning">Turno</label>
-            <select class="form-select bg-dark text-white border-warning" id="turno">
-              <option>Mañana</option>
-              <option>Tarde</option>
-              <option>Noche</option>
+            <select name="especialidad" class="form-select bg-dark text-white border-warning" required>
+              <option value="">Selecciona...</option>
+              <option value="Barbero" <?= ($empleadoData["especialidad"] ?? '') == 'Barbero' ? 'selected' : '' ?>>Barbero</option>
+              <option value="Corte de Cabello" <?= ($empleadoData["especialidad"] ?? '') == 'Corte de Cabello' ? 'selected' : '' ?>>Corte de Cabello</option>
+              <option value="Afeitado Clásico" <?= ($empleadoData["especialidad"] ?? '') == 'Afeitado Clásico' ? 'selected' : '' ?>>Afeitado Clásico</option>
             </select>
           </div>
           <div class="col-md-6">
-            <label class="form-label text-warning">Dirección</label>
-            <input type="text" class="form-control bg-dark text-white border-warning" id="direccion">
+            <label class="form-label text-warning">Teléfono</label>
+            <input type="tel" class="form-control bg-dark text-white border-warning" name="telefono" required value="<?= htmlspecialchars($empleadoData["telefono"] ?? '') ?>">
           </div>
-          <div class="col-md-3">
-            <label class="form-label text-warning">Días trabajados</label>
-            <input type="number" class="form-control bg-dark text-white border-warning" id="trabajados">
+
+          <div class="col-md-6">
+            <label class="form-label text-warning">Estado</label>
+            <select name="estado" class="form-select bg-dark text-white border-warning" required>
+              <option value="activo" <?= ($empleadoData["estado"] ?? '') == 'activo' ? 'selected' : '' ?>>Activo</option>
+              <option value="inactivo" <?= ($empleadoData["estado"] ?? '') == 'inactivo' ? 'selected' : '' ?>>Inactivo</option>
+            </select>
           </div>
-          <div class="col-md-3">
-            <label class="form-label text-warning">Días no trabajados</label>
-            <input type="number" class="form-control bg-dark text-white border-warning" id="noTrabajados">
-          </div>
-          <div class="col-md-3">
-            <label class="form-label text-warning">Paga por día ($)</label>
-            <input type="number" class="form-control bg-dark text-white border-warning" id="paga">
-          </div>
+
           <div class="col-12 text-end">
-            <button type="submit" class="btn btn-warning me-2">Guardar</button>
-            <button type="button" onclick="cancelarEdicion()" class="btn btn-outline-warning">Cancelar</button>
+            <button type="submit" class="btn btn-warning me-2">
+             <?= isset($action) ? 'Actualizar' : 'Crear Empleado' ?>
+            </button>
+            
+            <?php if ($action === "editar"): ?>
+              <a href="/barber/panel/empleados" class="btn btn-outline-warning">Cancelar</a>
+            <?php endif; ?>
           </div>
         </div>
       </form>
@@ -56,25 +66,43 @@
 
 
   <div class="card bg-dark border-warning">
-    <div class="card-body">
-      <h5 class="card-title">Lista de Barberos</h5>
-      <div class="table-responsive">
-        <table class="table table-dark table-bordered border-warning">
-          <thead class="table-warning text-dark">
-            <tr>
-              <th>Nombre</th>
-              <th>Especialidad</th>
-              <th>Teléfono</th>
-              <th>Turno</th>
-              <th>Trabajados</th>
-              <th>No trabajados</th>
-              <th>Paga</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tablaBarberos"></tbody>
-        </table>
+    <div class="card-header border-warning text-white">Lista de Barberos</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-dark table-bordered border-warning">
+            <thead class="table-warning text-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Especialidad</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+             <tbody>
+              <?php foreach ($stmt as $row): ?>
+                <tr>
+                  <td><?= $row['id_empleado'] ?></td>
+                  <td><?= htmlspecialchars($row['nombre']) ?></td>
+                  <td><?= htmlspecialchars($row['correo']) ?></td>
+                  <td><?= htmlspecialchars($row['especialidad']) ?></td>
+                  <td><?= htmlspecialchars($row['telefono']) ?></td>
+                  <td>
+                    <span class="badge <?= $row['estado'] == 'activo' ? 'bg-success' : 'bg-danger' ?>">
+                      <?= ucfirst($row['estado']) ?>
+                    </span>
+                  </td>
+                  <td>
+                    <a href="/barber/panel/empleados/<?= $row['id_empleado'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="/barber/panel/empleados/<?= $row['id_empleado'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este empleado?')">Eliminar</a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 </div>
