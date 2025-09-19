@@ -15,6 +15,7 @@ class BarberosController {
     // Mostrar lista
     public function index(): void {
         $stmt = $this->empleado->leerTodos();
+        $action = "crear"; //la pasamos a la vista
         require __DIR__ . "/vista/barberos.php";
     }
 

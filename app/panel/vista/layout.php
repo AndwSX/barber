@@ -22,7 +22,7 @@
     <a href="/barber/panel/empleados" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-cut me-2"></i>Barberos</a>
     <a href="/barber/panel/promociones" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-tags me-2"></i>Promociones</a>
     <a href="/barber/panel/citas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
-    <a href="/barber/panel/servicios" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Servicios</a>
+    <a href="/barber/panel/servicios" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-handshake me-2"></i>Gestión de Servicios</a>
 
     <a href="/homepage/index2.0.html" class="d-block my-2 text-dark text-decoration-none mt-auto border border-warning bg-warning p-2 rounded-3 d-flex align-items-center">Cerrar sesión</a>
   </div>
@@ -62,14 +62,32 @@
           case "promociones":
               require_once __DIR__ . "/../../modulos/promociones/controlador.php";
               $controller = new \App\Modulos\PromocionesController();
-              $controller->index();
-              break;
+              
+              if ($id && $action === "editar") {
+                  $controller->editar((int)$id);
+              } elseif ($id && $action === "eliminar") {
+                  $controller->eliminar((int)$id);
+              } elseif ($id === "crear") {
+                  $controller->crear();
+              } else {
+                  $controller->index();
+              }
+              break; 
 
           case "citas":
               require_once __DIR__ . "/../../modulos/citas/controlador.php";
               $controller = new \App\Modulos\CitasController();
-              $controller->index();
-              break;
+              
+              if ($id && $action === "editar") {
+                  $controller->editar((int)$id);
+              } elseif ($id && $action === "eliminar") {
+                  $controller->eliminar((int)$id);
+              } elseif ($id === "crear") {
+                  $controller->crear();
+              } else {
+                  $controller->index();
+              }
+              break; 
 
           case "servicios":
               require_once __DIR__ . "/../../modulos/servicios/controlador.php";

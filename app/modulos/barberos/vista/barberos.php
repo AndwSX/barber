@@ -3,7 +3,7 @@
     <i class="fas fa-scissors me-2"></i> Gestión de Barberos
   </h2>
 
-  <div class="card bg-dark border-warning mb-4">
+  <div class="card bg-black border-warning mb-4">
     <div class="card-body">
       <form method="POST" 
       action="<?= ($action ?? 'crear') === 'editar' 
@@ -59,7 +59,7 @@
 
 
 <!-- Lista de empleados -->
-  <div class="card bg-dark border-warning">
+  <div class="card bg-black border-warning">
     <div class="card-header border-warning text-white">Lista de Barberos</div>
       <div class="card-body">
         <div class="table-responsive">

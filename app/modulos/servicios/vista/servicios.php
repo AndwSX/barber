@@ -2,7 +2,7 @@
   <h2 class="text-center text-warning mb-4">Gestión de Servicios</h2>
 
   <!-- Formulario -->
-  <div class="card bg-dark border-warning mb-4">
+  <div class="card bg-black border-warning mb-4">
     <div class="card-header bg-warning text-dark">
       <?= ($action ?? 'crear') === 'editar' ? '✏️ Editar Servicio' : '➕ Nuevo Servicio' ?>
     </div>
@@ -47,7 +47,7 @@
   </div>
 
   <!-- Lista de servicios -->
-  <div class="card bg-dark border-warning">
+  <div class="card bg-black border-warning">
     <div class="card-header border-warning text-white">Lista de Servicios</div>
     <div class="card-body">
       <div class="table-responsive">

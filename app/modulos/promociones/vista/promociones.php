@@ -1,96 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Promociones Exclusivas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-</head>
-<body class="bg-dark text-light p-4">
-  <h2 class="text-center text-warning mb-4">Promociones Exclusivas</h2>
-
-  <div class="row g-4">
-    <!-- Cuadro de promociones existentes -->
-    <div class="col-md-8">
-      <div class="row g-4" id="contenedor-promociones">
-        <!-- Ejemplo de promoción existente -->
-        <div class="col-md-6">
-          <div class="card bg-black text-white border border-warning">
-            <div class="card-body text-center">
-              <div class="display-4 mb-3 text-warning">💈</div>
-              <h5 class="card-title text-white">Corte + Barba</h5>
-              <p class="card-text text-light">20% de descuento los miércoles.</p>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card bg-black text-white border border-warning">
-            <div class="card-body text-center">
-              <div class="display-4 mb-3 text-warning">🎉</div>
-              <h5 class="card-title text-white">Cumpleañeros</h5>
-              <p class="card-text text-light">Corte gratis el día de tu cumpleaños.</p>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card bg-black text-white border border-warning">
-            <div class="card-body text-center">
-              <div class="display-4 mb-3 text-warning">👥</div>
-              <h5 class="card-title text-white">Referidos</h5>
-              <p class="card-text text-light">15% de descuento por cada amigo referido.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card bg-black text-white border border-warning">
-            <div class="card-body text-center">
-              <div class="display-4 mb-3 text-warning">💳</div>
-              <h5 class="card-title text-white">Tarjeta Fidelidad</h5>
-              <p class="card-text text-light">Cada 5 cortes, 1 gratis.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card bg-black text-white border border-warning">
-            <div class="card-body text-center">
-              <div class="display-4 mb-3 text-warning">🧴</div>
-              <h5 class="card-title text-white">Tratamiento gratis</h5>
-              <p class="card-text text-light">Por cortes mayores a $30.000.</p>
-            </div>
+<h2 class="text-center text-warning mb-4">Promociones Exclusivas</h2>
+<div class="row g-4">
+  <!-- Listado -->
+  <div class="col-md-8">
+    <div class="row g-4">
+      <?php foreach ($stmt as $row): ?>
+      <div class="col-md-6">
+        <div class="card bg-black text-white border border-warning">
+          <div class="card-body text-center">
+            <div class="display-4 mb-3 text-warning">⭐</div>
+            <h5 class="card-title"><?= htmlspecialchars($row['nombre']) ?></h5>
+            <p class="card-text"><?= htmlspecialchars($row['descripcion']) ?></p>
+            <small class="text-secondary">Creado: <?= date("d-m-Y H:i", strtotime($row['fecha_creacion'])) ?></small><br>
+            <a href="/barber/panel/promociones/<?= $row['id_promocion'] ?>/editar" class="btn btn-sm btn-info mt-2"><i class="fa fa-pen"></i> Editar</a>
+            <a href="/barber/panel/promociones/<?= $row['id_promocion'] ?>/eliminar" class="btn btn-sm btn-danger mt-2" onclick="return confirm('¿Seguro que deseas eliminar esta promoción?');"><i class="fa fa-trash"></i> Eliminar</a>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Cuadro para agregar nueva promoción -->
-    <div class="col-md-4">
-      <div class="card bg-black text-white border border-warning">
-        <div class="card-body">
-          <h5 class="card-title text-warning text-center">Agregar Promoción</h5>
-          <div class="mb-2">
-            <label class="form-label">Nombre:</label>
-            <input type="text" id="nombrePromo" class="form-control bg-dark text-white border-warning" placeholder="Ej: Corte 2x1" />
-          </div>
-          <div class="mb-2">
-            <label class="form-label">Descripción:</label>
-            <textarea id="descripcionPromo" class="form-control bg-dark text-white border-warning" placeholder="Ej: Solo los viernes..." rows="2"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Tipo:</label>
-            <select id="tipoPromo" class="form-select bg-dark text-white border-warning">
-              <option value="💥">Descuento</option>
-              <option value="🎁">Regalo</option>
-              <option value="⭐">Especial</option>
-            </select>
-          </div>
-          <button onclick="agregarPromocion()" class="btn btn-warning w-100">Agregar</button>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 
-  <script src="/Agrupadoresjs/Promociones.js"></script>
-</body>
-</html>
+  <!-- Formulario -->
+  <div class="col-md-4">
+    <div class="card bg-black text-white border border-warning">
+      <div class="card-body">
+          <h5 class="text-warning text-center"><?= ($action ?? 'crear') === 'editar' ? '✏️ Editar Promoción' : '➕ Agregar Promoción' ?></h5>
+          <form method="POST" action="<?= ($action ?? 'crear') === 'editar' 
+                        ? "/barber/panel/promociones/".($idPromocion ?? '')."/editar" 
+                        : "/barber/panel/promociones/crear" ?>">
+            <div class="mb-2">
+              <label class="form-label">Nombre:</label>
+              <input type="text" name="nombre" value="<?= htmlspecialchars($promocionData['nombre'] ?? '') ?>" class="form-control bg-dark text-white border-warning" required />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Descripción:</label>
+              <textarea name="descripcion" class="form-control bg-dark text-white border-warning" rows="2" required><?= htmlspecialchars($promocionData['descripcion'] ?? '') ?></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tipo:</label>
+              <select name="tipo" class="form-select bg-dark text-white border-warning" required>
+                <option value="descuento" <?= ($promocionData['tipo'] ?? '') == "descuento" ? "selected": '' ?>>Descuento</option>
+                <option value="2x1" <?= ($promocionData['tipo'] ?? '') == "2x1" ? "selected": '' ?>>2x1</option>
+                <option value="envio_gratis" <?= ($promocionData['tipo'] ?? '') == "envio_gratis" ? "selected": '' ?>>Envío gratis</option>
+                <option value="regalo" <?= ($promocionData['tipo'] ?? '') == "regalo" ? "selected": '' ?>>Regalo</option>
+                <option value="otro" <?= ($promocionData['tipo'] ?? '') == "otro" ? "selected": '' ?>>Otro</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-warning w-100">
+                <?= ($action ?? 'crear') === 'editar' ? 'Actualizar' : 'Crear Promoción' ?>
+            </button>
+
+            <?php if ($action === "editar"): ?>
+              <a href="/barber/panel/promociones" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+            <?php endif; ?>
+          </form>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
