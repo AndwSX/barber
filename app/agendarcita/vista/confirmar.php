@@ -47,8 +47,8 @@
     <label for="pais">País</label>
     <select id="pais" name="pais">
       <option value="57" selected>+57</option>
-      <option value="1">1</option>
-      <option value="55">55</option>
+      <option value="1">+1</option>
+      <option value="55">+55</option>
       <!-- puedes añadir más -->
     </select>
   </div>

@@ -26,89 +26,18 @@
 <h1>Seleccionar servicios</h1>
 
         <h2 class="warning-title">Todos los servicios</h2>
-
+        <?php foreach ($stmt as $row): ?>
         <div class="service">
-                <h3>Corte Gold</h3>
-                <p class="duration">70min</p>
+                <h3><?= htmlspecialchars($row['nombre']) ?></h3>
+                <p class="duration"><?= $row['duracion_min'] ?> min</p>
                 <p class="description">
-                    Lleva tu corte con mascarilla de carbon, lavado de cabello, peinado, fragancia y masaje en hombros.
+                   <?= htmlspecialchars($row['descripcion']) ?>
                 </p>
-                <p class="price">$38.000</p>
-                <button class="toggle-btn " data-name="Corte Gold" data-price="38.000" onclick="toggleService(this)">+</button>
+                <p class="price">$<?= number_format($row['precio'], 0, ',', '.') ?></p>
+                <button class="toggle-btn " data-name="<?= htmlspecialchars($row['nombre']) ?>" data-price="<?= number_format($row['precio'], 0, ',', '.') ?>" onclick="toggleService(this)">+</button>
             </div>
             <br>
-
-            <div class="service" >
-                <h3>Corte Platinum</h3>
-                <p class="duration">60min</p>
-                <p class="description">
-                    Lleva un corte con peinado y fragancia después de tu servicio 
-                </p>
-                <p class="price">$ 28.000</p>
-                <button class="toggle-btn " data-name="Corte Platinum" data-price="28.000"  onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Corte Black Label</h3>
-                <p class="duration">80min</p>
-                <p class="description">
-                    Lleva tu corte, lavado,limpieza, exfoliante, mascarilla de carbón , mascarilla de colageno, hidratante, masaje en hombros, perfume y peinado 
-                </p>
-                <p class="price">$ 49.000</p>
-                <button class="toggle-btn " data-name="Corte Black Label" data-price="49.000" onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Corte y Barba Platinum</h3>
-                <p class="duration">80min</p>
-                <p class="description">
-                    Lleva tu corte sencillo, marcación de barba con navaja, aceite hidratante, peinado y fragancia después de tu servicio 
-                </p>
-                <p class="price">$ 59.000</p>
-                <button class="toggle-btn " data-name="Corte y Barba Platinum" data-price="59.000"  onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Corte y Barba Black Label</h3>
-                <p class="duration">80min</p>
-                <p class="description">
-                    Corte,marcación de barba con navaja, aceite hidratante,lavado de cabello ,limpieza, exfoliante, mascarilla de carbón , mascarilla de colageno, hidratante, masaje en hombros, perfume y peinado 
-                </p>
-                <p class="price">$ 69.000</p>
-                <button class="toggle-btn" data-name="Corte y Barba Black Label" data-price="69.000"  onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Barba Sola</h3>
-                <p class="duration">35min</p>
-                <p class="description">Recorte de barba, marcación con navaja, aceite hidratante, mascarilla en zona nariz, fragancia después de tu servicio</p>
-                <p class="price">$ 30.000</p>
-                <button class="toggle-btn " data-name="Barba Sola" data-price="30.000" onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Cejas</h3>
-                <p class="duration">7min</p>
-                <p class="description">Si las agregas con tu servicio te quedan la perfilacion de cejas en 5.000</p>
-                <p class="price">$ 10.000</p>
-                <button class="toggle-btn " data-name="Cejas" data-price="10.000"  onclick="toggleService(this)">+</button>
-            </div>
-            <br>
-
-            <div class="service">
-                <h3>Shampoo</h3>
-                <p class="duration">10min</p>
-                <p class="description">lavado sencillo y buen aroma</p>
-                <p class="price">$ 6.000</p>
-                <button class="toggle-btn " data-name="Shampoo" data-price="6.000"  onclick="toggleService(this)">+</button>
-
-            </div>
-            <br>
+        <?php endforeach; ?>
         </div>
     </div>
     

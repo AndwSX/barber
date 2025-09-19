@@ -25,36 +25,36 @@
 </nav>
 
         <h1>Seleccionar a un Profesional del Equipo</h1>
-
-      
-
         <div class="barbers-container">
           <div class="barber-card" onclick="seleccionarBarbero(this)" data-nombre="mayor disponibilidad" data-rating="5.0" data-foto="/barber/public/imagenes/aleatorio.jpg">
             <img src="/barber/public/imagenes/aleatorio.jpg" alt="Cualquier profesional" class="baber-photo shuffle-icon">
             <h3>Cualquier Profesional</h3>
             <p class="barber-role">Maxima disponibilidad</p>
           </div>
-               
-            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Carlos Perez" data-rating="5.0" data-foto="/barber/public/imagenes/barbero new.png">
-              <img src="/barber/public/imagenes/barbero new.png " alt="Carlos" class="barber-photo">
-              <div class="barber-rating">⭐ 5.0</div>
-              <h3>Carlos Perez</h3>
-              <p class="barber-role">Barbero Profesional</p>
-            </div>
+        <?php 
+          $imagenes = [
+              "/barber/public/imagenes/barbero new.png",
+              "/barber/public/imagenes/barbero new2.jpg",
+              "/barber/public/imagenes/barbero new3.jpg"
+          ];
 
-            <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Andres Diaz"  data-rating="5.0" data-foto="/barber/public/imagenes/barbero new2.jpg">
-              <img src="/barber/public/imagenes/barbero new2.jpg" alt="Andres" class="barber-photo">
-              <div class="barber-rating">⭐ 5.0</div>
-              <h3>Andres Diaz</h3>
-              <p class="barber-role">Barbero Profesional</p>
-            </div>
+          foreach ($stmt as $row): 
+              // Imagen aleatoria
+              $foto = $imagenes[array_rand($imagenes)];
+              // Rating aleatorio entre 4.0 y 5.0 (con un decimal)
+              $rating = number_format(mt_rand(40, 50) / 10, 1);
+          ?>
+              <div class="barber-card" onclick="seleccionarBarbero(this)" 
+                  data-nombre="<?= htmlspecialchars($row['nombre']) ?>" 
+                  data-rating="<?= $rating ?>" 
+                  data-foto="<?= $foto ?>">
 
-             <div class="barber-card"  onclick="seleccionarBarbero(this)" data-nombre="Jose Penagos"  data-rating="5.0" data-foto="/barber/public/imagenes/barbero new3.jpg">
-              <img src="/barber/public/imagenes/barbero new3.jpg " alt="Jose" class="barber-photo">
-              <div class="barber-rating">⭐ 5.0</div>
-              <h3>Jose Penagos</h3>
-              <p class="barber-role">Barbero Profesional</p>
-            </div>
+                  <img src="<?= $foto ?>" alt="<?= htmlspecialchars($row['nombre']) ?>" class="barber-photo">
+                  <div class="barber-rating">⭐ <?= $rating ?></div>
+                  <h3><?= htmlspecialchars($row['nombre']) ?></h3>
+                  <p class="barber-role">Especialidad: <?= htmlspecialchars($row['especialidad']) ?></p>
+              </div>
+          <?php endforeach; ?>
         </div>
     </div>
     <br>

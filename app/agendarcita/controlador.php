@@ -1,15 +1,31 @@
 <?php
 namespace App\AgendarCita;
 
+require_once __DIR__ . "/../modulos/servicios/modelo.php";
+require_once __DIR__ . "/../modulos/barberos/modelo.php";
+
+use App\Modelos\Servicio;
+use App\Modelos\Empleado;
+
 class AgendarCitaController {
+    private $servicio;
+    private $empleado;
+
+    public function __construct() {
+        $this->servicio = new Servicio();
+        $this->empleado = new Empleado();
+    }
+
     public function index(string $subRoute = ""): void {
         $sub = $subRoute; //variable para deifinir que mostrar
         switch($sub){
             case "servicios":
+                $stmt = $this->servicio->leerTodos(); //para traer todos los servicios a la vista
                 require __DIR__ . "/vista/servicios.php";
                 break;
             
             case "equipo":
+                $stmt = $this->empleado->leerTodos(); //para traer a todos los barberos
                 require __DIR__ . "/vista/equipo.php";
                 break;
 

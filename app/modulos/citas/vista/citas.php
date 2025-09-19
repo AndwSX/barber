@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Gestión de Citas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="container mt-4 bg-black text-white">
 
   <h3 class="text-warning mb-4">Gestión de Citas</h3>
 
   <!-- Formulario de Citas -->
-  <div class="border border-warning p-3 rounded">
+  <div class="border border-warning bg-black p-3 rounded">
     <h5 class="text-warning mb-3">Formulario de Cita</h5>
     <div class="row">
       <div class="col-md-6">
@@ -91,7 +83,7 @@
   </div>
 
   <!-- Tabla de Citas -->
-  <div class="border border-warning mt-4 p-3 rounded">
+  <div class="border border-warning bg-black mt-4 p-3 rounded">
     <table class="table table-bordered text-center">
       <thead class="table-warning">
         <tr>
