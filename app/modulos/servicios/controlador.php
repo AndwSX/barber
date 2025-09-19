@@ -40,27 +40,25 @@ class ServiciosController {
         }
     }
 
-    // Editar servicio
+    // Editar Servicio
     public function editar(int $id): void {
         $servicioData = $this->servicio->leerUno($id);
 
-        if (!$empleadoData) {
-            echo "Empleado no encontrado.";
+        if (!$servicioData) {
+            echo "Servicio no encontrado.";
             return;
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $data = [
                 'nombre'       => $_POST['nombre'] ?? '',
-                'correo'       => $_POST['correo'] ?? '',
-                'contrasena'   => $_POST['contrasena'] ?? '123456',
-                'especialidad' => $_POST['especialidad'] ?? '',
-                'telefono'     => $_POST['telefono'] ?? '',
-                'estado'       => $_POST['estado'] ?? 'activo'
+                'descripcion'       => $_POST['descripcion'] ?? '',
+                'precio'   => $_POST['precio'] ?? '',
+                'duracion_min' => $_POST['duracion_min'] ?? '' 
             ];
 
             if ($this->servicio->actualizar($id, $data)) {
-                header("Location: /barber/panel/empleados");
+                header("Location: /barber/panel/servicios");
                 exit;
             } else {
                 $error = "Error al actualizar.";

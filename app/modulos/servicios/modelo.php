@@ -39,7 +39,7 @@ class Servicio{
 
     // Leer Todos
     public function leerTodos(): array {
-        $query = "SELECT * FROM {$this->table} ORDER BY nombre ASC";
+        $query = "SELECT * FROM {$this->table} ORDER BY id_servicio DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
