@@ -3,19 +3,12 @@
     <i class="fas fa-scissors me-2"></i> Gestión de Barberos
   </h2>
 
-  <?php if (isset($_GET['mensaje'])): ?>
-    <div class="alert alert-info"><?= htmlspecialchars($_GET['mensaje']) ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($error)): ?>
-    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-  <?php endif; ?>
-
   <div class="card bg-dark border-warning mb-4">
     <div class="card-body">
-      <form method="POST" action="<?= $action === 'editar' 
-                          ? "/barber/panel/empleados/$idEmpleado/editar" 
-                          : "/barber/panel/empleados/crear" ?>">
+      <form method="POST" 
+      action="<?= ($action ?? 'crear') === 'editar' 
+                  ? "/barber/panel/empleados/".($idEmpleado ?? '')."/editar" 
+                  : "/barber/panel/empleados/crear" ?>">
          <input type="hidden" name="id_empleado" value="<?= $idEmpleado ?? '' ?>">
 
         <div class="row g-3">
@@ -65,6 +58,7 @@
   </div>
 
 
+<!-- Lista de empleados -->
   <div class="card bg-dark border-warning">
     <div class="card-header border-warning text-white">Lista de Barberos</div>
       <div class="card-body">

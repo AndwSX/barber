@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <link rel="icon"  type="image/png" href="/barber/public/imagenes/logo.jpg">
-  <link rel="stylesheet" href="/public/css/modulos.css">
+  <link rel="stylesheet" href="/barber/public/css/modulos.css">
 </head>
 
 <body class="bg-dark text-light">
@@ -22,6 +22,7 @@
     <a href="/barber/panel/empleados" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-cut me-2"></i>Barberos</a>
     <a href="/barber/panel/promociones" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-tags me-2"></i>Promociones</a>
     <a href="/barber/panel/citas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
+    <a href="/barber/panel/servicios" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Servicios</a>
 
     <a href="/homepage/index2.0.html" class="d-block my-2 text-dark text-decoration-none mt-auto border border-warning bg-warning p-2 rounded-3 d-flex align-items-center">Cerrar sesión</a>
   </div>
@@ -70,8 +71,23 @@
               $controller->index();
               break;
 
+          case "servicios":
+              require_once __DIR__ . "/../../modulos/servicios/controlador.php";
+              $controller = new \App\Modulos\ServiciosController();
+
+              if ($id && $action === "editar") {
+                  $controller->editar((int)$id);
+              } elseif ($id && $action === "eliminar") {
+                  $controller->eliminar((int)$id);
+              } elseif ($id === "crear") {
+                  $controller->crear();
+              } else {
+                  $controller->index();
+              }
+              break; 
+
           default:
-              echo $sub;
+              echo $modulo;
               break;
       }
       ?>
