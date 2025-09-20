@@ -64,6 +64,18 @@ class Cliente {
         return $cliente ?: null;
     }
 
+    //Leer por correo
+    public function obtenerPorCorreo(string $correo): ?array {
+        $sql = "SELECT id_cliente, nombre, correo, telefono 
+                FROM {$this->table} 
+                WHERE correo = :correo 
+                LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':correo' => $correo]);
+        $cliente = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $cliente ?: null;
+    }
+
     //Actualizar
     public function actualizar(int $id, array $data): bool {
         $sql = "UPDATE {$this->table} 

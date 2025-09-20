@@ -5,11 +5,13 @@ require_once __DIR__ . "/modelo.php";
 require_once __DIR__ . "/../servicios/modelo.php";
 require_once __DIR__ . "/../barberos/modelo.php";
 require_once __DIR__ . "/../clientes/modelo.php";
+require_once __DIR__ . "/../../helpers/mailer.php";
 
 use App\Modelos\Reserva;
 use App\Modelos\Servicio;
 use App\Modelos\Empleado;
 use App\Modelos\Cliente;
+use App\Helpers\Mailer;
 
 class ReservasController {
     private $reserva;
@@ -36,17 +38,25 @@ class ReservasController {
     // Crear reserva
     public function crear(): void {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // Crear cliente o usar existente
-            $clienteData = [
-                'nombre'   => $_POST['cliente'] ?? '',
-                'correo'   => $_POST['correo'] ?? '',
-                'telefono' => $_POST['telefono'] ?? ''
-            ];
-            $idCliente = $this->cliente->crear($clienteData);
-            if (!$idCliente) {
-                echo "Error: Cliente no válido o ya registrado.";
-                return;
-            }
+            // 1. Verificar si ya existe cliente por correo
+            $clienteExistente = $this->cliente->obtenerPorCorreo($_POST['correo']);
+
+
+            if ($clienteExistente) {
+                $idCliente = $clienteExistente["id_cliente"];
+            } else {
+                $clienteData = [
+                    'nombre'   => $_POST['cliente'] ?? '',
+                    'correo'   => $_POST['correo'] ?? '',
+                    'telefono' => $_POST['telefono'] ?? ''
+                ];
+
+                $idCliente = $this->cliente->crear($clienteData);
+                if (!$idCliente) {
+                    echo "Error: No se pudo crear o buscar el cliente";
+                    return;
+                }
+            }            
 
             // Crear reserva
             $reservaData = [
@@ -62,6 +72,21 @@ class ReservasController {
                 if (!empty($_POST['servicios'])) {
                     $this->reserva->agregarServicios($idReserva, $_POST['servicios']);
                 }
+                // Obtener nombre del barbero
+                $barbero = $this->empleado->leerUno((int) $data["barbero"]);
+                $nombreBarbero = $barbero ? $barbero["nombre"] : "Barbero asignado";
+
+                // Enviar correo al cliente
+                Mailer::enviarReservaExitosa(
+                    $_POST['correo'],
+                    $_POST['cliente'],
+                    [
+                        "fecha"   => $_POST['fecha'],
+                        "hora"    => $_POST['hora'],
+                        "barbero" => $nombreBarbero
+                    ]
+                );
+
                 header("Location: /barber/panel/reservas");
                 exit;
             } else {

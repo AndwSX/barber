@@ -5,11 +5,13 @@ require_once __DIR__ . "/../modulos/servicios/modelo.php";
 require_once __DIR__ . "/../modulos/barberos/modelo.php";
 require_once __DIR__ . "/../modulos/clientes/modelo.php";
 require_once __DIR__ . "/../modulos/reservas/modelo.php";
+require_once __DIR__ . "/../helpers/mailer.php";
 
 use App\Modelos\Servicio;
 use App\Modelos\Empleado;
 use App\Modelos\Cliente;
 use App\Modelos\Reserva;
+use App\Helpers\Mailer;
 
 class AgendarCitaController {
     private $servicio;
@@ -58,19 +60,26 @@ class AgendarCitaController {
                     return;
                 }
 
-                // 1. Crear cliente
-                $clienteId = $this->cliente->crear([
-                    "nombre"   => $data["cliente"]["nombre"] ?? null,
-                    "correo"   => $data["cliente"]["email"] ?? null,
-                    "telefono" => $data["cliente"]["telefono"] ?? null,
-                ]);
+                // 1. Verificar si ya existe cliente por correo
+                $clienteExistente = $this->cliente->obtenerPorCorreo($data["cliente"]["email"]);
 
-                if (!$clienteId) {
-                    echo json_encode([
-                        "success" => false,
-                        "message" => "No se pudo crear el cliente"
+                if ($clienteExistente) {
+                    $clienteId = $clienteExistente["id_cliente"];
+                } else {
+                    // 1. Crear cliente
+                    $clienteId = $this->cliente->crear([
+                        "nombre"   => $data["cliente"]["nombre"] ?? null,
+                        "correo"   => $data["cliente"]["email"] ?? null,
+                        "telefono" => $data["cliente"]["telefono"] ?? null,
                     ]);
-                    return;
+
+                    if (!$clienteId) {
+                        echo json_encode([
+                            "success" => false,
+                            "message" => "No se pudo crear el cliente"
+                        ]);
+                        return;
+                    }
                 }
 
                 // 2. Crear reserva
@@ -94,6 +103,21 @@ class AgendarCitaController {
                 if (!empty($servicios)) {
                     $this->reserva->agregarServicios($reservaId, $servicios);
                 }
+
+                // 3.1 Obtener nombre del barbero
+                $barbero = $this->empleado->leerUno((int) $data["barbero"]);
+                $nombreBarbero = $barbero ? $barbero["nombre"] : "Barbero asignado";
+
+                // 4. Enviar correo al cliente
+                Mailer::enviarReservaExitosa(
+                    $data["cliente"]["email"],
+                    $data["cliente"]["nombre"],
+                    [
+                        "fecha"   => $data["fecha"],
+                        "hora"    => $data["hora"],
+                        "barbero" => $nombreBarbero
+                    ]
+                );
 
                 echo json_encode([
                     "success"    => true,
