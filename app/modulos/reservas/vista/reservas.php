@@ -33,12 +33,13 @@
         <div class="col-md-3">
           <label class="text-warning">Fecha</label>
           <input type="date" name="fecha" class="form-control bg-dark text-white"
-                value="<?= htmlspecialchars($reservaData['fecha'] ?? '') ?>">
+                value="<?= htmlspecialchars($reservaData['fecha'] ?? '') ?>"
+                min="<?= date('Y-m-d') ?>">
         </div>
 
         <div class="col-md-3">
           <label class="text-warning">Hora</label>
-          <input type="time" name="hora" class="form-control bg-dark text-white"
+          <input type="time" id="hora" name="hora" class="form-control bg-dark text-white"
                 value="<?= htmlspecialchars($reservaData['hora'] ?? '') ?>">
         </div>
 
@@ -122,6 +123,6 @@
     </table>
   </div>
 
-  <script src="/Agrupadoresjs/Hora.js"></script>
+  <script src="/barber/public/js/reservas/horas.js"></script>
 </body>
 </html>

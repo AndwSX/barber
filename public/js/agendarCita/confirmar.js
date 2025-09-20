@@ -74,41 +74,60 @@
     }
   }
 
-  // --- Enviar reserva ---
-  async function enviarReserva(datosCliente) {
-    const barbero = JSON.parse(localStorage.getItem('barberoSeleccionado') || '{}');
-    const servicios = JSON.parse(localStorage.getItem('serviciosSeleccionados') || '[]');
-    const fecha = localStorage.getItem('fechaSeleccionada');
-    const hora = localStorage.getItem('horaSeleccionada');
+ // --- Enviar reserva ---
+async function enviarReserva(datosCliente) {
+  const barbero = JSON.parse(localStorage.getItem('barberoSeleccionado') || '{}');
+  const servicios = JSON.parse(localStorage.getItem('serviciosSeleccionados') || '[]');
+  const fecha = localStorage.getItem('fechaSeleccionada');
+  const hora = localStorage.getItem('horaSeleccionada');
 
-    // Construir payload exactamente como lo pides
-    const payload = {
-      cliente: {
-        nombre: datosCliente.nombre,
-        email: datosCliente.email,
-        telefono: `+${datosCliente.pais}${datosCliente.telefono}`
-      },
-      servicios: servicios.map(s => s.id),
-      barbero: barbero.id_empleado,
-      fecha: fecha,
-      hora: hora
-    };
-
-    try {
-      const res = await fetch('/barber/api/reservas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) throw new Error('Error al guardar la reserva');
-      return await res.json();
-    } catch (err) {
-      console.error(err);
-      alert('No se pudo completar la reserva.');
-      return null;
+  // 🕒 Convertir hora a formato 24h (HH:MM:SS)
+  let horaSQL = null;
+  if (hora) {
+    const h = new Date(`1970-01-01T${hora}`);
+    // Si el valor viene en 07:00 PM
+    if (isNaN(h.getTime())) {
+      // intentar parsear manual
+      const [time, modifier] = hora.split(" ");
+      let [hours, minutes] = time.split(":");
+      hours = parseInt(hours, 10);
+      if (modifier === "PM" && hours < 12) hours += 12;
+      if (modifier === "AM" && hours === 12) hours = 0;
+      horaSQL = `${String(hours).padStart(2, "0")}:${minutes}:00`;
+    } else {
+      // ya venía como 24h
+      horaSQL = h.toTimeString().slice(0, 8);
     }
   }
+
+  // Construir payload exactamente como lo necesitas
+  const payload = {
+    cliente: {
+      nombre: datosCliente.nombre,
+      email: datosCliente.email,
+      telefono: datosCliente.telefono
+    },
+    servicios: servicios.map(s => s.id),
+    barbero: barbero.id_empleado,
+    fecha: fecha,
+    hora: horaSQL //ya en formato TIME válido
+  };
+
+  try {
+    const res = await fetch('/barber/agendar-cita/guardar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Error al guardar la reserva');
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    alert('No se pudo completar la reserva.');
+    return null;
+  }
+}
 
   // --- Inicializar ---
   document.addEventListener('DOMContentLoaded', () => {
