@@ -21,7 +21,7 @@
     <a href="/barber/panel/clientes" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-users me-2"></i>Clientes</a>
     <a href="/barber/panel/empleados" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-cut me-2"></i>Barberos</a>
     <a href="/barber/panel/promociones" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-tags me-2"></i>Promociones</a>
-    <a href="/barber/panel/citas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
+    <a href="/barber/panel/reservas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
     <a href="/barber/panel/servicios" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-handshake me-2"></i>Gestión de Servicios</a>
 
     <a href="/homepage/index2.0.html" class="d-block my-2 text-dark text-decoration-none mt-auto border border-warning bg-warning p-2 rounded-3 d-flex align-items-center">Cerrar sesión</a>
@@ -83,9 +83,9 @@
               }
               break; 
 
-          case "citas":
-              require_once __DIR__ . "/../../modulos/citas/controlador.php";
-              $controller = new \App\Modulos\CitasController();
+          case "reservas":
+              require_once __DIR__ . "/../../modulos/reservas/controlador.php";
+              $controller = new \App\Modulos\ReservasController();
               
               if ($id && $action === "editar") {
                   $controller->editar((int)$id);

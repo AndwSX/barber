@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-09-2025 a las 21:18:19
+-- Tiempo de generación: 20-09-2025 a las 23:47:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,20 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `telefono`, `correo`, `fecha_registro`) VALUES
-(1, 'pablo', '3212520864', 'andrdesfelipeobregon860@gmail.com', '2025-06-04 05:00:00');
+(1, 'pablo', '3212520864', 'andresobregonn860@gmail.com', '2025-06-04 05:00:00'),
+(4, 'Juan Camilo', '3222567657', 'juanca@gmail.com', '2025-09-20 21:04:39');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_reserva`
+--
+
+CREATE TABLE `detalle_reserva` (
+  `id_detalle` int(11) NOT NULL,
+  `id_reserva` int(11) NOT NULL,
+  `id_servicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,20 +77,6 @@ CREATE TABLE `empleados` (
 INSERT INTO `empleados` (`id_empleado`, `nombre`, `correo`, `especialidad`, `telefono`, `estado`) VALUES
 (2, 'Sebastian', '245666@gmail.com', 'Barbero', '3192365078', 'activo'),
 (8, 'Andres', 'sadasd@gmail.com', 'Barbero', '3192365078', 'activo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pagos`
---
-
-CREATE TABLE `pagos` (
-  `id_pago` int(11) NOT NULL,
-  `id_cita` int(11) NOT NULL,
-  `monto` decimal(10,2) NOT NULL,
-  `metodo_pago` varchar(50) DEFAULT NULL,
-  `fecha_pago` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -108,12 +107,11 @@ INSERT INTO `promociones` (`id_promocion`, `nombre`, `descripcion`, `tipo`, `fec
 --
 
 CREATE TABLE `reservas` (
-  `id_cita` int(11) NOT NULL,
+  `id_reserva` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `id_empleado` int(11) NOT NULL,
   `fecha_reserva` date NOT NULL,
   `hora_reserva` time NOT NULL,
-  `id_servicio` int(11) NOT NULL,
   `creada_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -182,17 +180,18 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`);
 
 --
+-- Indices de la tabla `detalle_reserva`
+--
+ALTER TABLE `detalle_reserva`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD KEY `id_cita` (`id_reserva`),
+  ADD KEY `detalle_ibkf_2` (`id_servicio`);
+
+--
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id_empleado`);
-
---
--- Indices de la tabla `pagos`
---
-ALTER TABLE `pagos`
-  ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `id_cita` (`id_cita`);
 
 --
 -- Indices de la tabla `promociones`
@@ -204,10 +203,9 @@ ALTER TABLE `promociones`
 -- Indices de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD PRIMARY KEY (`id_cita`),
+  ADD PRIMARY KEY (`id_reserva`),
   ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_empleado` (`id_empleado`),
-  ADD KEY `citas_ibkf_3` (`id_servicio`);
+  ADD KEY `id_empleado` (`id_empleado`);
 
 --
 -- Indices de la tabla `servicios`
@@ -230,19 +228,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_reserva`
+--
+ALTER TABLE `detalle_reserva`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
   MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT de la tabla `pagos`
---
-ALTER TABLE `pagos`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `promociones`
@@ -254,7 +252,7 @@ ALTER TABLE `promociones`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -273,10 +271,16 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `detalle_reserva`
+--
+ALTER TABLE `detalle_reserva`
+  ADD CONSTRAINT `detalle_ibkf_1` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_ibkf_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`);
+
+--
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `citas_ibkf_3` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`),
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`);
 COMMIT;

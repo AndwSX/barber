@@ -15,24 +15,34 @@ class Cliente {
         $this->conn = $db->getConnection();
     }
 
-   // Crear cliente
+    // Crear cliente
     public function crear(array $data): int|false {
-        $sql = "INSERT INTO {$this->table} 
-                (nombre, correo, telefono)
-                VALUES (:nombre, :correo, :telefono)";
-
-        $stmt = $this->conn->prepare($sql);
-
         // Validar correo
-        $data['correo'] = filter_var($data['correo'], FILTER_VALIDATE_EMAIL);
+        $correo = filter_var($data['correo'], FILTER_VALIDATE_EMAIL);
+        if (!$correo) {
+            return false; // Correo inválido
+        }
+
+        // Verificar si ya existe el correo
+        $checkSql = "SELECT COUNT(*) FROM {$this->table} WHERE correo = :correo";
+        $checkStmt = $this->conn->prepare($checkSql);
+        $checkStmt->execute([':correo' => $correo]);
+
+        if ($checkStmt->fetchColumn() > 0) {
+            return false; // Correo ya registrado
+        }
+
+        // Insertar nuevo cliente
+        $sql = "INSERT INTO {$this->table} (nombre, correo, telefono)
+                VALUES (:nombre, :correo, :telefono)";
+        $stmt = $this->conn->prepare($sql);
 
         if ($stmt->execute([
             ':nombre'   => $data['nombre'],
-            ':correo'   => $data['correo'],
+            ':correo'   => $correo,
             ':telefono' => $data['telefono']
         ])) {
-            // Retorna el id autoincremental generado
-            return (int) $this->conn->lastInsertId();
+            return (int) $this->conn->lastInsertId(); // Retorna el id autoincremental generado
         }
 
         return false;

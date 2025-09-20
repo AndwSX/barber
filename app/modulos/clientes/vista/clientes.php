@@ -24,7 +24,7 @@
          </div>
          <div class="col-md-12 text-end">
 
-           <button class="btn btn-warning mt-3 me-2" onclick="agregarCliente()">
+           <button class="btn btn-warning mt-3 me-2">
              <?= ($action ?? 'crear') === 'editar' ? 'Actualizar' : '<i class="fas fa-user-plus me-1"></i>Agregar Cliente' ?>
            </button>
 
