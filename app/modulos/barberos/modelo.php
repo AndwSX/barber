@@ -18,19 +18,17 @@ class Empleado {
     // Crear empleado
     public function crear(array $data): bool {
         $sql = "INSERT INTO {$this->table} 
-                (nombre, correo, password, especialidad, telefono, estado)
-                VALUES (:nombre, :correo, :contrasena, :especialidad, :telefono, :estado)";
+                (nombre, correo, especialidad, telefono, estado)
+                VALUES (:nombre, :correo, :especialidad, :telefono, :estado)";
 
         $stmt = $this->conn->prepare($sql);
 
         $data['correo'] = filter_var($data['correo'], FILTER_VALIDATE_EMAIL);
-        $data['contrasena'] = password_hash($data['contrasena'], PASSWORD_DEFAULT);
         $data['estado'] = in_array($data['estado'], ['activo', 'inactivo']) ? $data['estado'] : 'activo';
 
         return $stmt->execute([
             ':nombre'       => $data['nombre'],
             ':correo'       => $data['correo'],
-            ':contrasena'   => $data['contrasena'],
             ':especialidad' => $data['especialidad'],
             ':telefono'     => $data['telefono'],
             ':estado'       => $data['estado']

@@ -33,6 +33,7 @@
                 <p class="description">
                    <?= htmlspecialchars($row['descripcion']) ?>
                 </p>
+                <input type="hidden" name="id_servicio" id="id_servicio" value="<?= $row['id_servicio'] ?>">
                 <p class="price">$<?= number_format($row['precio'], 0, ',', '.') ?></p>
                 <button class="toggle-btn " data-name="<?= htmlspecialchars($row['nombre']) ?>" data-price="<?= number_format($row['precio'], 0, ',', '.') ?>" onclick="toggleService(this)">+</button>
             </div>

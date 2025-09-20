@@ -52,6 +52,7 @@
                   <img src="<?= $foto ?>" alt="<?= htmlspecialchars($row['nombre']) ?>" class="barber-photo">
                   <div class="barber-rating">⭐ <?= $rating ?></div>
                   <h3><?= htmlspecialchars($row['nombre']) ?></h3>
+                  <input type="hidden" name="id_empleado" id="id_empleado" value="<?= $row['id_empleado'] ?>">
                   <p class="barber-role">Especialidad: <?= htmlspecialchars($row['especialidad']) ?></p>
               </div>
           <?php endforeach; ?>

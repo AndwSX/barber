@@ -25,7 +25,6 @@ class BarberosController {
             $data = [
                 'nombre'       => $_POST['nombre'] ?? '',
                 'correo'       => $_POST['correo'] ?? '',
-                'contrasena'   => $_POST['contrasena'] ?? '123456',
                 'especialidad' => $_POST['especialidad'] ?? '',
                 'telefono'     => $_POST['telefono'] ?? '',
                 'estado'       => $_POST['estado'] ?? 'activo'
@@ -55,7 +54,6 @@ class BarberosController {
             $data = [
                 'nombre'       => $_POST['nombre'] ?? '',
                 'correo'       => $_POST['correo'] ?? '',
-                'contrasena'   => $_POST['contrasena'] ?? '123456',
                 'especialidad' => $_POST['especialidad'] ?? '',
                 'telefono'     => $_POST['telefono'] ?? '',
                 'estado'       => $_POST['estado'] ?? 'activo'
