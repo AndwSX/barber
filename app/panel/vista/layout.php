@@ -41,7 +41,16 @@
           case "clientes":
               require_once __DIR__ . "/../../modulos/clientes/controlador.php";
               $controller = new \App\Modulos\ClientesController();
-              $controller->index();
+              
+              if ($id && $action === "editar") {
+                  $controller->editar((int)$id);
+              } elseif ($id && $action === "eliminar") {
+                  $controller->eliminar((int)$id);
+              } elseif ($id === "crear") {
+                  $controller->crear();
+              } else {
+                  $controller->index();
+              }
               break;
             
           case "empleados":

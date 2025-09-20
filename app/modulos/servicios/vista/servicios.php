@@ -51,7 +51,7 @@
     <div class="card-header border-warning text-white">Lista de Servicios</div>
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-dark table-bordered border-warning">
+        <table class="table table-dark table-bordered border-warning align-middle text-center">
           <thead class="table-warning text-dark">
             <tr>
               <th>ID</th>

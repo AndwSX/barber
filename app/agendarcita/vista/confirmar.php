@@ -60,7 +60,7 @@
       id="telefono"
       name="telefono"
       required
-      maxlength="15"
+      maxlength="10"
       pattern="[0-9]+"
       inputmode="numeric"
       oninput="this.value = this.value.replace(/[^0-9]/g, '')"

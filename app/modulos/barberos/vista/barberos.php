@@ -32,7 +32,7 @@
           </div>
           <div class="col-md-6">
             <label class="form-label text-warning">Teléfono</label>
-            <input type="tel" class="form-control bg-dark text-white border-warning" name="telefono" required value="<?= htmlspecialchars($empleadoData["telefono"] ?? '') ?>">
+            <input type="tel" class="form-control bg-dark text-white border-warning" name="telefono" required value="<?= htmlspecialchars($empleadoData["telefono"] ?? '') ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="10">
           </div>
 
           <div class="col-md-6">
@@ -45,11 +45,11 @@
 
           <div class="col-12 text-end">
             <button type="submit" class="btn btn-warning me-2">
-             <?= isset($action) ? 'Actualizar' : 'Crear Empleado' ?>
+             <?= ($action ?? 'crear') === 'editar' ? 'Actualizar' : '<i class="fas fa-user-plus me-1"></i>Agregar Empleado' ?>
             </button>
             
             <?php if ($action === "editar"): ?>
-              <a href="/barber/panel/empleados" class="btn btn-outline-warning">Cancelar</a>
+              <a href="/barber/panel/empleados" class="btn btn-outline-warning"><i class="fas fa-times me-1"></i>Cancelar</a>
             <?php endif; ?>
           </div>
         </div>
@@ -63,7 +63,7 @@
     <div class="card-header border-warning text-white">Lista de Barberos</div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-dark table-bordered border-warning">
+          <table class="table table-dark table-bordered border-warning align-middle text-center">
             <thead class="table-warning text-dark">
               <tr>
                 <th>ID</th>
