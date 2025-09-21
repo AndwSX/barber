@@ -154,4 +154,36 @@ class Reserva {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':id_reserva' => $id]);
     }
+
+    // Clientes semanales
+    public function clientesSemanales(): int {
+        $sql = "SELECT COUNT(*) 
+                FROM reservas 
+                WHERE YEARWEEK(creada_en, 1) = YEARWEEK(CURDATE(), 1)";
+        return (int)$this->conn->query($sql)->fetchColumn();
+    }
+
+    // Conteo de servicios
+    public function conteoServicios(): array {
+        $sql = "SELECT s.nombre AS servicio, COUNT(dr.id_servicio) AS cantidad
+                FROM detalle_reserva dr
+                INNER JOIN servicios s ON dr.id_servicio = s.id_servicio
+                GROUP BY s.nombre";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Total de ingresos por mes
+    public function ingresosPorMes(): array {
+        $sql = "SELECT 
+                    MONTH(r.creada_en) AS mes,
+                    SUM(s.precio) AS total
+                FROM reservas r
+                INNER JOIN detalle_reserva dr ON r.id_reserva = dr.id_reserva
+                INNER JOIN servicios s ON dr.id_servicio = s.id_servicio
+                GROUP BY MONTH(r.creada_en)
+                ORDER BY mes ASC";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

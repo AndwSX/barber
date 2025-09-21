@@ -32,32 +32,16 @@
                             <h5 class="card-title text-warning">Progreso de Ventas</h5>
                             <canvas id="progressChart"></canvas>
                             <div class="mt-3">
-                                <span class="badge bg-warning text-dark me-2">Total Revenue: $24,000</span>
-                                <span class="badge bg-success">Profit So Far: $12,000</span>
+                                <span class="badge bg-warning text-dark me-2">
+                                    Total este mes: $ <?= number_format($totalMesActual, 0, ',', '.') ?>
+                                </span>
                             </div>
                         </div>
                         <div class="mt-4">
                             <h6 class="text-warning">Servicios Detallados</h6>
-                            <ul class="list-unstyled mb-0">
-                                <li class="d-flex justify-content-between align-items-center servicio-item">
-                                    <span class="badge bg-warning text-dark">Corte</span>
-                                    <span class="text-light fw-bold">120 servicios</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center servicio-item">
-                                    <span class="badge bg-primary">Barba</span>
-                                    <span class="text-light fw-bold">75 servicios</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center servicio-item">
-                                    <span class="badge bg-success">Cejas</span>
-                                    <span class="text-light fw-bold">45 servicios</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center servicio-item">
-                                    <span class="badge bg-danger">Otros</span>
-                                    <span class="text-light fw-bold">60 servicios</span>
-                                </li>
-                            </ul>
+                            <ul id="listaServicios" class="list-unstyled mb-0"></ul>
                             <div class="mt-2 text-center">
-                                <small class="text-muted">*Clientes semanales: 60</small>
+                                <small id="conteoClientes" class="text-light"></small>
                             </div>
                         </div>
                     </div>
@@ -72,12 +56,7 @@
                             <h5 class="card-title text-warning">Distribución de Servicios</h5>
                             <canvas id="doughnutChart"></canvas>
                         </div>
-                        <div class="mt-3 text-center">
-                            <span class="badge bg-warning text-dark me-1">Corte: 40%</span>
-                            <span class="badge bg-primary me-1">Barba: 25%</span>
-                            <span class="badge bg-success me-1">Cejas: 15%</span>
-                            <span class="badge bg-danger">Otros: 20%</span>
-                        </div>
+                        <div class="mt-3 text-center" id="porcentajesServicios"></div>
                     </div>
                 </div>
             </div>
@@ -88,6 +67,14 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Archivo JS separado -->
+    <script>
+        const labels = <?= json_encode($labels) ?>;
+        const ingresos = <?= json_encode(array_values($ingresosPorMes)) ?>;
+        
+        const serviciosData = <?= json_encode($servicios) ?>;
+        const clientesData = <?= json_encode($clientes) ?>;
+    </script>
+
     <script src="/barber/public/js/dashboard/grafica.js"></script>
 </body>
 </html>
