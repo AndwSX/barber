@@ -78,7 +78,8 @@ class BarberosController {
             header("Location: /barber/panel/empleados");
             exit;
         } else {
-            echo "Error al eliminar.";
+            echo "Error: no se puede eliminar el empleado porque tiene reservas asociadas.";
+            exit;
         }
     }
 }

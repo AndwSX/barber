@@ -77,7 +77,8 @@ class ClientesController {
             header("Location: /barber/panel/clientes");
             exit;
         } else {
-            echo "Error al eliminar.";
+            echo "Error: no se puede eliminar el cliente porque tiene reservas asociadas.";
+            exit;
         }
     }
 }

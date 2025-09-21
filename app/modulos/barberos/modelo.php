@@ -73,10 +73,17 @@ class Empleado {
         ]);
     }
 
-    // Eliminar
+    // Eliminar empleado
     public function eliminar(int $id): bool {
-        $sql = "DELETE FROM {$this->table} WHERE id_empleado = :id";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([':id' => $id]);
+        try {
+            $sql = "DELETE FROM {$this->table} WHERE id_empleado = :id";
+            $stmt = $this->conn->prepare($sql);
+            return $stmt->execute([':id' => $id]);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == "23000") {
+                return false; // No se puede eliminar porque hay reservas asociadas
+            }
+            throw $e; // Si es otro error distinto, lo relanzamos
+        }
     }
 }

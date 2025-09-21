@@ -96,8 +96,15 @@ class Cliente {
 
     // Eliminar
     public function eliminar(int $id): bool {
-        $sql = "DELETE FROM {$this->table} WHERE id_cliente = :id";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([':id' => $id]);
+        try {
+            $sql = "DELETE FROM {$this->table} WHERE id_cliente = :id";
+            $stmt = $this->conn->prepare($sql);
+            return $stmt->execute([':id' => $id]);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == "23000") {
+                return false; // no se pudo eliminar por relación con reservas
+            }
+            throw $e; // si es otro error, lo relanzas
+        }
     }
 }
