@@ -37,7 +37,7 @@ class Empleado {
 
     //Leer todos
     public function leerTodos(): array {
-        $sql = "SELECT * FROM {$this->table} ORDER BY nombre ASC";
+        $sql = "SELECT * FROM {$this->table} ORDER BY id_empleado DESC";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
