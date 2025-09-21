@@ -24,7 +24,8 @@
     <a href="/barber/panel/reservas" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-calendar me-2"></i>Gestión de Citas</a>
     <a href="/barber/panel/servicios" class="d-block my-2 text-warning text-decoration-none"><i class="fas fa-handshake me-2"></i>Gestión de Servicios</a>
 
-    <a href="/homepage/index2.0.html" class="d-block my-2 text-dark text-decoration-none mt-auto border border-warning bg-warning p-2 rounded-3 d-flex align-items-center">Cerrar sesión</a>
+    
+    <button id="btnLogout"class="d-block my-2 text-dark text-decoration-none mt-auto border border-warning bg-warning p-2 rounded-3 d-flex align-items-center">Cerrar sesión</button>
   </div>
 
   <!-- Contenido dinámico -->
@@ -122,5 +123,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/barber/public/js/panel/logout.js"></script>
 </body>
 </html>

@@ -34,9 +34,23 @@ class Router {
 
             //Panel administrativo
             case "panel":
+                require_once __DIR__ . "/auth/auth.php";
+
+                if (!\App\Auth\Auth::check()) {
+                    // No está logueado
+                    header("Location: /barber");
+                    exit;
+                }
                 require_once __DIR__ . "/panel/controlador.php";
                 $controller = new \App\Panel\PanelController();
                 $controller->index($subRoute, $id, $accion);
+                break;
+
+            //Cerrar Sesion
+            case "auth-logout":
+                require_once __DIR__ . "/auth/controlador.php";
+                $controller = new \App\Auth\AuthController();
+                $controller->logout();
                 break;
 
 
