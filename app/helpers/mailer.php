@@ -16,7 +16,7 @@ class Mailer {
             $mail->Host       = 'smtp.gmail.com';  
             $mail->SMTPAuth   = true;
             $mail->Username   = 'nominasena793@gmail.com'; 
-            $mail->Password   = 'zlwp jisw lsfz sskz'; // no la clave normal, debe ser App Password
+            $mail->Password   = 'app password'; // no la clave normal, debe ser App Password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
