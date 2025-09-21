@@ -8,8 +8,8 @@
     </div>
     <div class="card-body">
       <form method="POST" action="<?= ($action ?? 'crear') === 'editar' 
-                          ? "/barber/panel/servicios/".($idServicio ?? '')."/editar" 
-                          : "/barber/panel/servicios/crear" ?>">
+                          ? BASE_PATH . "panel/servicios/".($idServicio ?? '')."/editar" 
+                          : BASE_PATH . "panel/servicios/crear" ?>">
         <input type="hidden" name="id_servicio" value="<?= isset($_GET['editar']) ? $_GET['editar'] : '' ?>">
 
         <div class="row">
@@ -39,7 +39,7 @@
           </button>
 
           <?php if ($action === "editar"): ?>
-            <a href="/barber/panel/servicios" class="btn btn-outline-warning">Cancelar</a>
+            <a href="<?= BASE_PATH ?>panel/servicios" class="btn btn-outline-warning">Cancelar</a>
           <?php endif; ?>
         </div>
       </form>
@@ -69,8 +69,8 @@
               <td><?= $row['duracion_min'] ?> min</td>
               <td><span class="badge bg-warning">$<?= number_format($row['precio'], 0, ',', '.') ?></span></td>
               <td>
-                <a href="/barber/panel/servicios/<?= $row['id_servicio'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
-                <a href="/barber/panel/servicios/<?= $row['id_servicio'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este servicio?')">Eliminar</a>
+                <a href="<?= BASE_PATH ?>panel/servicios/<?= $row['id_servicio'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
+                <a href="<?= BASE_PATH ?>panel/servicios/<?= $row['id_servicio'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este servicio?')">Eliminar</a>
               </td>
             </tr>
             <?php endforeach; ?>

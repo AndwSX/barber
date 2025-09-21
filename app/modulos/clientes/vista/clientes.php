@@ -5,8 +5,8 @@
   <!-- Formulario -->
    <form method="POST" 
       action="<?= ($action ?? 'crear') === 'editar' 
-                  ? "/barber/panel/clientes/".($idCliente ?? '')."/editar" 
-                  : "/barber/panel/clientes/crear" ?>">
+                  ? BASE_PATH . "panel/clientes/".($idCliente ?? '')."/editar" 
+                  : BASE_PATH . "panel/clientes/crear" ?>">
       <input type="hidden" name="id_cliente" value="<?= $idCliente ?? '' ?>">
      <div class="border bg-black border-warning rounded p-4 mb-4">
        <div class="row g-3">
@@ -29,7 +29,7 @@
            </button>
 
            <?php if ($action === "editar"): ?>
-           <a href="/barber/panel/clientes" class="btn btn-outline-warning mt-3"><i class="fas fa-times me-1"></i>Cancelar</a>
+           <a href="<?= BASE_PATH ?>panel/clientes" class="btn btn-outline-warning mt-3"><i class="fas fa-times me-1"></i>Cancelar</a>
            <?php endif; ?>
          </div>
        </div>
@@ -57,8 +57,8 @@
                 <td><?= htmlspecialchars($row['correo']) ?></td>
                 <td><?= htmlspecialchars($row['telefono']) ?></td>
                 <td>
-                  <a href="/barber/panel/clientes/<?= $row['id_cliente'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
-                  <a href="/barber/panel/clientes/<?= $row['id_cliente'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este cliente?')">Eliminar</a>
+                  <a href="<?= BASE_PATH ?>panel/clientes/<?= $row['id_cliente'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
+                  <a href="<?= BASE_PATH ?>panel/clientes/<?= $row['id_cliente'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este cliente?')">Eliminar</a>
                 </td>
               </tr>
             <?php endforeach; ?>

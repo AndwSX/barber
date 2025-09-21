@@ -26,7 +26,7 @@
     localStorage.removeItem("barberoSeleccionado");
     localStorage.removeItem("fechaSeleccionada");
     localStorage.removeItem("horaSeleccionada");
-    window.location.href = "/barber/";
+    window.location.href = BASE_PATH;
   });
 
   // --- Carrusel de fechas ---
@@ -203,7 +203,8 @@
     if (btn) {
       btn.disabled = !(barbero.nombre && servicios.length > 0 && fecha && hora);
       btn.onclick = () => {
-        if (!btn.disabled) window.location.href = "confirmar";
+        if (!btn.disabled) window.location.href = BASE_PATH + '/agendar-cita/confirmar';
+
       };
     }
   }

@@ -129,7 +129,7 @@
     document.querySelector('.btn-cancel')?.addEventListener('click', () => {
       localStorage.removeItem('serviciosSeleccionados');
       localStorage.removeItem('barberoSeleccionado');
-      window.location.href = '/barber/'; // ruta home
+      window.location.href = BASE_PATH; // ruta home
     });
 
     // Botón continuar
@@ -148,8 +148,7 @@
           return;
         }
 
-        // 👉 ajusta la ruta según cómo esté en tu servidor
-        window.location.href = 'horario';
+        window.location.href = BASE_PATH + '/agendar-cita/horario';
       });
     }
   });

@@ -75,6 +75,6 @@
         const clientesData = <?= json_encode($clientes) ?>;
     </script>
 
-    <script src="/barber/public/js/dashboard/grafica.js"></script>
+    <script src="<?= BASE_PATH ?>public/js/dashboard/grafica.js"></script>
 </body>
 </html>

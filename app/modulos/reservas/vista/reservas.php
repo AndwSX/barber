@@ -4,8 +4,8 @@
   <!-- Formulario de Citas -->
   <form method="POST" 
       action="<?= ($action ?? 'crear') === 'editar' 
-                  ? "/barber/panel/reservas/".($idReserva ?? '')."/editar" 
-                  : "/barber/panel/reservas/crear" ?>">
+                  ? BASE_PATH . "panel/reservas/".($idReserva ?? '')."/editar" 
+                  : BASE_PATH . "panel/reservas/crear" ?>">
     <!-- Enviar el id del cliente a actualizar -->
     <input type="hidden" name="id_cliente" value="<?= htmlspecialchars($reservaData['id_cliente']) ?>">
 
@@ -79,7 +79,7 @@
         </button>
 
         <?php if ($action === "editar"): ?>
-           <a href="/barber/panel/reservas" class="btn btn-outline-warning"><i class="fas fa-times me-1"></i>Cancelar</a>
+           <a href="<?= BASE_PATH ?>panel/reservas" class="btn btn-outline-warning"><i class="fas fa-times me-1"></i>Cancelar</a>
         <?php endif; ?>
       </div>
     </div>
@@ -114,8 +114,8 @@
                 <td><?= $row['servicios'] ?></td>
                 <td><?= $row['duracion_total'] ?> min</td>
                 <td>
-                    <a href="/barber/panel/reservas/<?= $row['id_reserva'] ?>/editar" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="/barber/panel/reservas/<?= $row['id_reserva'] ?>/eliminar" class="btn btn-sm btn-danger">Eliminar</a>
+                    <a href="<?= BASE_PATH ?>panel/reservas/<?= $row['id_reserva'] ?>/editar" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="<?= BASE_PATH ?>panel/reservas/<?= $row['id_reserva'] ?>/eliminar" class="btn btn-sm btn-danger">Eliminar</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -123,6 +123,6 @@
     </table>
   </div>
 
-  <script src="/barber/public/js/reservas/horas.js"></script>
+  <script src="<?= BASE_PATH ?>public/js/reservas/horas.js"></script>
 </body>
 </html>

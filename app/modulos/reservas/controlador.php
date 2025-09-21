@@ -87,7 +87,7 @@ class ReservasController {
                     ]
                 );
 
-                header("Location: /barber/panel/reservas");
+                header("Location: " . BASE_PATH . "panel/reservas");
                 exit;
             } else {
                 echo "Error al crear la reserva.";
@@ -134,7 +134,7 @@ class ReservasController {
                 $servicios = $_POST['servicios'] ?? []; // array de servicios seleccionados
                 $this->reserva->actualizarServicios($id, $servicios);
 
-                header("Location: /barber/panel/reservas");
+                header("Location: " . BASE_PATH . "panel/reservas");
                 exit;
             } else {
                 echo "Error al actualizar.";
@@ -153,7 +153,7 @@ class ReservasController {
     // Eliminar reserva
     public function eliminar(int $id): void {
         if ($this->reserva->eliminar($id)) {
-            header("Location: /barber/panel/reservas");
+            header("Location: " . BASE_PATH . "panel/reservas");
             exit;
         } else {
             echo "Error al eliminar.";

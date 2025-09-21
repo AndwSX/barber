@@ -1,13 +1,12 @@
 RewriteEngine On
-RewriteBase /barber/
 
-# No redirigir si es un archivo en /public
-RewriteCond %{REQUEST_URI} ^/barber/public/.*$ [NC]
+# Detectar si es un archivo real dentro de /public
+RewriteCond %{REQUEST_URI} /public/ [NC]
 RewriteRule .* - [L]
 
-# Ignorar archivos/carpetas reales
+# Ignorar archivos/carpetas existentes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Redirigir todo lo demás a index.php
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^ index.php [QSA,L]

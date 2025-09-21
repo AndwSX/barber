@@ -31,7 +31,7 @@ class BarberosController {
             ];
 
             if ($this->empleado->crear($data)) {
-                header("Location: /barber/panel/empleados");
+                header("Location: " . BASE_PATH . "/panel/empleados");
                 exit;
             } else {
                 $error = "Error al crear.";
@@ -60,7 +60,7 @@ class BarberosController {
             ];
 
             if ($this->empleado->actualizar($id, $data)) {
-                header("Location: /barber/panel/empleados");
+                header("Location: " . BASE_PATH . "panel/empleados");
                 exit;
             } else {
                 $error = "Error al actualizar.";
@@ -75,7 +75,7 @@ class BarberosController {
     // Eliminar empleado
     public function eliminar(int $id): void {
         if ($this->empleado->eliminar($id)) {
-            header("Location: /barber/panel/empleados");
+            header("Location: " . BASE_PATH . "panel/empleados");
             exit;
         } else {
             echo "Error: no se puede eliminar el empleado porque tiene reservas asociadas.";

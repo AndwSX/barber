@@ -38,7 +38,7 @@ class Router {
 
                 if (!\App\Auth\Auth::check()) {
                     // No está logueado
-                    header("Location: /barber");
+                    header("Location: " . BASE_PATH);
                     exit;
                 }
                 require_once __DIR__ . "/panel/controlador.php";

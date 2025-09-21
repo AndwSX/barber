@@ -30,7 +30,7 @@ class ServiciosController {
             ];
 
             if ($this->servicio->crear($data)) {
-                header("Location: /barber/panel/servicios");
+                header("Location: " . BASE_PATH . "panel/servicios");
                 exit;
             } else {
                 $error = "Error al crear.";
@@ -58,7 +58,7 @@ class ServiciosController {
             ];
 
             if ($this->servicio->actualizar($id, $data)) {
-                header("Location: /barber/panel/servicios");
+                header("Location: " . BASE_PATH . "panel/servicios");
                 exit;
             } else {
                 $error = "Error al actualizar.";
@@ -73,7 +73,7 @@ class ServiciosController {
     // Eliminar servicio
     public function eliminar(int $id): void {
         if ($this->servicio->eliminar($id)) {
-            header("Location: /barber/panel/servicios");
+            header("Location: " . BASE_PATH . "panel/servicios");
             exit;
         } else {
             echo "Error al eliminar.";

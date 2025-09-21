@@ -11,8 +11,8 @@
             <h5 class="card-title"><?= htmlspecialchars($row['nombre']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($row['descripcion']) ?></p>
             <small class="text-secondary">Creado: <?= date("d-m-Y H:i", strtotime($row['fecha_creacion'])) ?></small><br>
-            <a href="/barber/panel/promociones/<?= $row['id_promocion'] ?>/editar" class="btn btn-sm btn-info mt-2"><i class="fa fa-pen"></i> Editar</a>
-            <a href="/barber/panel/promociones/<?= $row['id_promocion'] ?>/eliminar" class="btn btn-sm btn-danger mt-2" onclick="return confirm('¿Seguro que deseas eliminar esta promoción?');"><i class="fa fa-trash"></i> Eliminar</a>
+            <a href="<?= BASE_PATH ?>panel/promociones/<?= $row['id_promocion'] ?>/editar" class="btn btn-sm btn-info mt-2"><i class="fa fa-pen"></i> Editar</a>
+            <a href="<?= BASE_PATH ?>panel/promociones/<?= $row['id_promocion'] ?>/eliminar" class="btn btn-sm btn-danger mt-2" onclick="return confirm('¿Seguro que deseas eliminar esta promoción?');"><i class="fa fa-trash"></i> Eliminar</a>
           </div>
         </div>
       </div>
@@ -26,8 +26,8 @@
       <div class="card-body">
           <h5 class="text-warning text-center"><?= ($action ?? 'crear') === 'editar' ? '✏️ Editar Promoción' : '➕ Agregar Promoción' ?></h5>
           <form method="POST" action="<?= ($action ?? 'crear') === 'editar' 
-                        ? "/barber/panel/promociones/".($idPromocion ?? '')."/editar" 
-                        : "/barber/panel/promociones/crear" ?>">
+                        ? BASE_PATH . "panel/promociones/".($idPromocion ?? '')."/editar" 
+                        : BASE_PATH . "panel/promociones/crear" ?>">
             <div class="mb-2">
               <label class="form-label">Nombre:</label>
               <input type="text" name="nombre" value="<?= htmlspecialchars($promocionData['nombre'] ?? '') ?>" class="form-control bg-dark text-white border-warning" required />
@@ -52,7 +52,7 @@
             </button>
 
             <?php if ($action === "editar"): ?>
-              <a href="/barber/panel/promociones" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+              <a href="<?= BASE_PATH ?>panel/promociones" class="btn btn-secondary w-100 mt-2">Cancelar</a>
             <?php endif; ?>
           </form>
     

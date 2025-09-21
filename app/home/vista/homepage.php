@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Style Barber</title>
-    <link rel="icon"  type="image/png" href="/barber/public/imagenes/logo.jpg">
+  <base href="<?= BASE_PATH ?>">
+  <script>const BASE_PATH = "<?= BASE_PATH ?>";</script>
+  <link rel="icon"  type="image/png" href="public/imagenes/logo.jpg">
       <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -390,7 +392,7 @@ html {
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid px-4">
       <a class="navbar-brand d-flex align-items text-white fw-bold" href="#">
-        <img src="/barber/public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
+        <img src="public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
        <span class="text-warning">Style Barber</span> 
       </a>
       <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -468,13 +470,13 @@ html {
   <div class="container-fluid">
     <div class="row g-0">
       <div class="col-4">
-        <div class="bg-img" style="background-image: url('/barber/public/imagenes/barbero\ 3.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-left"></div>
+        <div class="bg-img" style="background-image: url('public/imagenes/barbero\ 3.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-left"></div>
       </div>
       <div class="col-4">
-        <div class="bg-img" style="background-image: url('/barber/public/imagenes/barbero\ 2.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-right"></div>
+        <div class="bg-img" style="background-image: url('public/imagenes/barbero\ 2.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-right"></div>
       </div>
       <div class="col-4">
-        <div class="bg-img" style="background-image: url('/barber/public/imagenes/barbero1.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-up"></div>
+        <div class="bg-img" style="background-image: url('public/imagenes/barbero1.jpg'); height: 100vh; background-size: cover; background-position: center;" data-aos="fade-up"></div>
       </div>
     </div>
 
@@ -506,17 +508,17 @@ html {
     
     <div class="row">
       <div class="col-md-4 mb-4" data-aos="">
-        <img src="/barber/public/imagenes/antigua  barber.avif" alt="Experiencia" class="img-fluid rounded shadow" data-aos="fade-left">
+        <img src="public/imagenes/antigua  barber.avif" alt="Experiencia" class="img-fluid rounded shadow" data-aos="fade-left">
         <h5 class="mt-3 fw-bold">+10 Años de Experiencia</h5>
         <p>Formamos estilos que reflejan personalidad, autenticidad y actitud.</p>
       </div>
       <div class="col-md-4 mb-4">
-        <img src="/barber/public/imagenes/equipo barberos.jpg" alt="Nuestro Equipo" class="img-fluid rounded shadow" data-aos="fade-right">
+        <img src="public/imagenes/equipo barberos.jpg" alt="Nuestro Equipo" class="img-fluid rounded shadow" data-aos="fade-right">
         <h5 class="mt-3 fw-bold">Equipo Profesional</h5>
         <p>Barberos dedicados a brindar atención personalizada y un trato top.</p>
       </div>
       <div class="col-md-4 mb-4">
-        <img src="/barber/public/imagenes/barberi sitio.jpg" alt="Ambiente" class="img-fluid rounded shadow" data-aos="fade-left">
+        <img src="public/imagenes/barberi sitio.jpg" alt="Ambiente" class="img-fluid rounded shadow" data-aos="fade-left">
         <h5 class="mt-3 fw-bold">Ambiente Exclusivo</h5>
         <p>Un lugar donde cada visita es una experiencia única y relajante.</p>
       </div>
@@ -532,7 +534,7 @@ html {
       
       <div class="col-md-4">
         <div class="card bg-dark border-0 h-100 shadow-sm">
-          <img src="/barber/public/imagenes/corte de cabello.jpg" class="card-img-top" alt="Corte de Cabello" data-aos="fade-right">
+          <img src="public/imagenes/corte de cabello.jpg" class="card-img-top" alt="Corte de Cabello" data-aos="fade-right">
           <div class="card-body" data-aos="fade-left">
             <h5 class="card-title fw-bold" style="color: #f9a825;">Corte de Cabello</h5>
             <p class="card-text text-white-50">Diseños personalizados para un estilo único y moderno.</p>
@@ -542,7 +544,7 @@ html {
       
       <div class="col-md-4">
         <div class="card bg-dark border-0 h-100 shadow-sm">
-          <img src="/barber/public/imagenes/afeitado.jpg" class="card-img-top" alt="Afeitado Clásico" data-aos="fade-right">
+          <img src="public/imagenes/afeitado.jpg" class="card-img-top" alt="Afeitado Clásico" data-aos="fade-right">
           <div class="card-body" data-aos="fade-left">
             <h5 class="card-title fw-bold" style="color: #f9a825;">Afeitado Clásico</h5>
             <p class="card-text text-white-50">Afeitado tradicional con navaja para una piel suave y perfecta.</p>
@@ -552,7 +554,7 @@ html {
       
       <div class="col-md-4">
         <div class="card bg-dark border-0 h-100 shadow-sm">
-          <img src="/barber/public/imagenes/barba.jpg" class="card-img-top" alt="Diseño de Barba" data-aos="fade-right">
+          <img src="public/imagenes/barba.jpg" class="card-img-top" alt="Diseño de Barba" data-aos="fade-right">
           <div class="card-body" data-aos="fade-left">
             <h5 class="card-title fw-bold" style="color: #f9a825;">Diseño de Barba</h5>
             <p class="card-text text-white-50">Perfilados y arreglos que resaltan tu personalidad.</p>
@@ -687,21 +689,21 @@ html {
   <div class="carousel-inner" data-aos="">
 
     <div class="carousel-item active position-relative">
-      <img src="/barber/public/imagenes/barbero new.png" class="d-block w-100 carousel-img" alt="barbero 1">
+      <img src="public/imagenes/barbero new.png" class="d-block w-100 carousel-img" alt="barbero 1">
       <div class="carousel-caption-custom">
         <h3>Carlos Perez</h3>
       </div>
     </div>
 
     <div class="carousel-item position-relative">
-      <img src="/barber/public/imagenes/barbero new2.jpg" class="d-block w-100 carousel-img" alt="barbero 2">
+      <img src="public/imagenes/barbero new2.jpg" class="d-block w-100 carousel-img" alt="barbero 2">
       <div class="carousel-caption-custom">
         <h3>Andres Diaz</h3>
       </div>
     </div>
 
     <div class="carousel-item">
-      <img src="/barber/public/imagenes/barbero new3.jpg" class="d-block w-100 carousel-img" alt="barbero 3">
+      <img src="public/imagenes/barbero new3.jpg" class="d-block w-100 carousel-img" alt="barbero 3">
       <div class="carousel-caption-custom">
         <h3>Jose Penagos</h3>
       </div>
@@ -736,7 +738,7 @@ html {
 </section>
 
 <footer style="
-  background-image: url('/barber/public/imagenes/foter.jpg');
+  background-image: url('public/imagenes/foter.jpg');
   background-size: cover;
   background-position: center;
   color: white;
@@ -795,6 +797,6 @@ html {
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-     <script src="/barber/public/js/homepage/index.js"></script>
+     <script src="public/js/homepage/index.js"></script>
 </body>
 </html>

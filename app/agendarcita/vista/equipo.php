@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar servicios - Barberia</title>
-    <link rel="stylesheet" href="/barber/public/css/agendarCita.css">
-     <link rel="icon"  type="image/png" href="/barber/public/imagenes/logo.jpg">
+    <base href="<?= BASE_PATH ?>">
+    <script>const BASE_PATH = "<?= BASE_PATH ?>";</script>
+    <link rel="stylesheet" href="public/css/agendarCita.css">
+     <link rel="icon"  type="image/png" href="public/imagenes/logo.jpg">
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
   <div class="top-action">
-    <img src="/barber/public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
+    <img src="public/imagenes/logo.jpg" alt="logo" width="30" height="30" class="me-2">
     <span class="warning-title">Style Barber</span> 
     <button class="btn-icon btn-back" title="Volver">←</button>
     <button class="btn-icon btn-cancel" title="Cancelar y volver al inicio">✕</button>
@@ -26,16 +28,16 @@
 
         <h1>Seleccionar a un Profesional del Equipo</h1>
         <div class="barbers-container">
-          <div class="barber-card" onclick="seleccionarBarbero(this)" data-nombre="mayor disponibilidad" data-rating="5.0" data-foto="/barber/public/imagenes/aleatorio.jpg">
-            <img src="/barber/public/imagenes/aleatorio.jpg" alt="Cualquier profesional" class="baber-photo shuffle-icon">
+          <div class="barber-card" onclick="seleccionarBarbero(this)" data-nombre="mayor disponibilidad" data-rating="5.0" data-foto="public/imagenes/aleatorio.jpg">
+            <img src="public/imagenes/aleatorio.jpg" alt="Cualquier profesional" class="baber-photo shuffle-icon">
             <h3>Cualquier Profesional</h3>
             <p class="barber-role">Maxima disponibilidad</p>
           </div>
         <?php 
           $imagenes = [
-              "/barber/public/imagenes/barbero new.png",
-              "/barber/public/imagenes/barbero new2.jpg",
-              "/barber/public/imagenes/barbero new3.jpg"
+              "public/imagenes/barbero new.png",
+              "public/imagenes/barbero new2.jpg",
+              "public/imagenes/barbero new3.jpg"
           ];
 
           foreach ($stmt as $row): 
@@ -62,7 +64,7 @@
     
     <aside class="sumary">
         <div class="shop-info">
-            <img src="/barber/public/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
+            <img src="public/imagenes/logo.jpg" alt="Logo Barberia" class="shop-logo">
         </div>
         <strong class="warning-title">Style Barber</strong>
         <p>carrera 59#129b-32</p>
@@ -86,6 +88,6 @@
 
       <button class="btn-continue"disabled>Continuar</button>
     </aside>
- <script src="/barber/public/js/agendarCita/equipo.js"></script>
+ <script src="public/js/agendarCita/equipo.js"></script>
 </body>
 </html>

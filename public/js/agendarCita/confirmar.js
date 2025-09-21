@@ -114,7 +114,7 @@ async function enviarReserva(datosCliente) {
   };
 
   try {
-    const res = await fetch('/barber/agendar-cita/guardar', {
+    const res = await fetch(BASE_PATH + 'agendar-cita/guardar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -137,7 +137,7 @@ async function enviarReserva(datosCliente) {
     document.querySelector('.btn-back')?.addEventListener('click', () => window.history.back());
     document.querySelector('.btn-cancel')?.addEventListener('click', () => {
       localStorage.clear();
-      window.location.href = '/barber/';
+      window.location.href = BASE_PATH;
     });
 
     // Formulario confirmación
@@ -163,7 +163,7 @@ async function enviarReserva(datosCliente) {
           document.getElementById('mensaje-exito').style.display = 'block';
           setTimeout(() => {
             localStorage.clear();
-            window.location.href = '/barber/';
+            window.location.href = BASE_PATH;
           }, 2000);
         }
       });

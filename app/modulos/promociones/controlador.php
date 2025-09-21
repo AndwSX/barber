@@ -29,7 +29,7 @@ class PromocionesController {
             ];
 
             if ($this->promocion->crear($data)) {
-                header("Location: /barber/panel/promociones");
+                header("Location: " . BASE_PATH . "panel/promociones");
                 exit;
             } else {
                 $error = "Error al crear.";
@@ -56,7 +56,7 @@ class PromocionesController {
             ];
 
             if ($this->promocion->actualizar($id, $data)) {
-                header("Location: /barber/panel/promociones");
+                header("Location: " . BASE_PATH . "panel/promociones");
                 exit;
             } else {
                 $error = "Error al actualizar.";
@@ -71,7 +71,7 @@ class PromocionesController {
     // Eliminar servicio
     public function eliminar(int $id): void {
         if ($this->promocion->eliminar($id)) {
-            header("Location: /barber/panel/promociones");
+            header("Location: " . BASE_PATH . "panel/promociones");
             exit;
         } else {
             echo "Error al eliminar.";

@@ -169,17 +169,17 @@
     if (btnContinuar) {
       btnContinuar.addEventListener('click', () => {
         // ya está guardado en localStorage, solo redirigimos
-        window.location.href = 'equipo';
+        window.location.href = BASE_PATH + '/agendar-cita/equipo';
       });
     }
 
     // 4) Breadcrumb (marca la sección activa según path)
     (function marcarBreadcrumb() {
       const secciones = [
-        { ruta: '/barber/agendar-cita/servicios', texto: 'Servicios' },
-        { ruta: '/barber/agendar-cita/equipo', texto: 'Equipo' },
-        { ruta: '/barber/agendar-cita/horario', texto: 'Horario' },
-        { ruta: '/barber/agendar-cita/confirmar', texto: 'Confirmar' },
+        { ruta: BASE_PATH + 'agendar-cita/servicios', texto: 'Servicios' },
+        { ruta: BASE_PATH + 'agendar-cita/equipo', texto: 'Equipo' },
+        { ruta: BASE_PATH + 'agendar-cita/horario', texto: 'Horario' },
+        { ruta: BASE_PATH + 'agendar-cita/confirmar', texto: 'Confirmar' },
       ];
       const path = window.location.pathname;
       const breadcrumbSpans = document.querySelectorAll('.breadcrumb span');
@@ -204,7 +204,7 @@
     if (btnCancel) {
       btnCancel.addEventListener('click', () => {
         localStorage.removeItem('serviciosSeleccionados');
-        window.location.href = '/barber/';
+        window.location.href = BASE_PATH;
       });
     }
   });

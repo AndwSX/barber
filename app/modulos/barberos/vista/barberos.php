@@ -7,8 +7,8 @@
     <div class="card-body">
       <form method="POST" 
       action="<?= ($action ?? 'crear') === 'editar' 
-                  ? "/barber/panel/empleados/".($idEmpleado ?? '')."/editar" 
-                  : "/barber/panel/empleados/crear" ?>">
+                  ? BASE_PATH . "panel/empleados/".($idEmpleado ?? '')."/editar" 
+                  : BASE_PATH . "panel/empleados/crear" ?>">
          <input type="hidden" name="id_empleado" value="<?= $idEmpleado ?? '' ?>">
 
         <div class="row g-3">
@@ -49,7 +49,7 @@
             </button>
             
             <?php if ($action === "editar"): ?>
-              <a href="/barber/panel/empleados" class="btn btn-outline-warning"><i class="fas fa-times me-1"></i>Cancelar</a>
+              <a href="<?= BASE_PATH ?>panel/empleados" class="btn btn-outline-warning"><i class="fas fa-times me-1"></i>Cancelar</a>
             <?php endif; ?>
           </div>
         </div>
@@ -89,8 +89,8 @@
                     </span>
                   </td>
                   <td>
-                    <a href="/barber/panel/empleados/<?= $row['id_empleado'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="/barber/panel/empleados/<?= $row['id_empleado'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este empleado?')">Eliminar</a>
+                    <a href="<?= BASE_PATH ?>panel/empleados/<?= $row['id_empleado'] ?>/editar" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="<?= BASE_PATH ?>panel/empleados/<?= $row['id_empleado'] ?>/eliminar" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este empleado?')">Eliminar</a>
                   </td>
                 </tr>
               <?php endforeach; ?>

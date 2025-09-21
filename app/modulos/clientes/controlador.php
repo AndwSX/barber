@@ -31,7 +31,7 @@ class ClientesController {
             $idCliente = $this->cliente->crear($data);
 
             if ($idCliente !== false) {
-                header("Location: /barber/panel/clientes");
+                header("Location: " . BASE_PATH . "panel/clientes");
                 exit;
             } else {
                 $error = "Error al crear.";
@@ -59,7 +59,7 @@ class ClientesController {
             ];
 
             if ($this->cliente->actualizar($id, $data)) {
-                header("Location: /barber/panel/clientes");
+                header("Location: " . BASE_PATH . "panel/clientes");
                 exit;
             } else {
                 $error = "Error al actualizar.";
@@ -74,7 +74,7 @@ class ClientesController {
     // Eliminar cliente
     public function eliminar(int $id): void {
         if ($this->cliente->eliminar($id)) {
-            header("Location: /barber/panel/clientes");
+            header("Location: " . BASE_PATH . "panel/clientes");
             exit;
         } else {
             echo "Error: no se puede eliminar el cliente porque tiene reservas asociadas.";
