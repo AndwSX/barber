@@ -68,7 +68,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     }
 
     if (data.success) {
-      alert("Bienvenido " + data.usuario.nombre);
+      alert("Bienvenido " + data.usuario.usuario);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
       window.location.href = "panel";
     } else {

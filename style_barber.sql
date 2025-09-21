@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-09-2025 a las 23:47:28
+-- Tiempo de generación: 21-09-2025 a las 03:20:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -35,14 +35,6 @@ CREATE TABLE `clientes` (
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id_cliente`, `nombre`, `telefono`, `correo`, `fecha_registro`) VALUES
-(1, 'pablo', '3212520864', 'andresobregonn860@gmail.com', '2025-06-04 05:00:00'),
-(4, 'Juan Camilo', '3222567657', 'juanca@gmail.com', '2025-09-20 21:04:39');
-
 -- --------------------------------------------------------
 
 --
@@ -70,14 +62,6 @@ CREATE TABLE `empleados` (
   `estado` varchar(20) DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `empleados`
---
-
-INSERT INTO `empleados` (`id_empleado`, `nombre`, `correo`, `especialidad`, `telefono`, `estado`) VALUES
-(2, 'Sebastian', '245666@gmail.com', 'Barbero', '3192365078', 'activo'),
-(8, 'Andres', 'sadasd@gmail.com', 'Barbero', '3192365078', 'activo');
-
 -- --------------------------------------------------------
 
 --
@@ -91,14 +75,6 @@ CREATE TABLE `promociones` (
   `tipo` enum('descuento','2x1','envio_gratis','regalo','otro') NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `promociones`
---
-
-INSERT INTO `promociones` (`id_promocion`, `nombre`, `descripcion`, `tipo`, `fecha_creacion`) VALUES
-(1, 'Referidos', 'Trae a tus amiguitos', 'descuento', '2025-09-19 03:20:27'),
-(2, 'Cupon 2x1', 'Cupon de descuento', '2x1', '2025-09-19 03:35:46');
 
 -- --------------------------------------------------------
 
@@ -129,20 +105,6 @@ CREATE TABLE `servicios` (
   `duracion_min` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `servicios`
---
-
-INSERT INTO `servicios` (`id_servicio`, `nombre`, `descripcion`, `precio`, `duracion_min`) VALUES
-(1, 'Corte de cabello', 'Corte clásico con máquina o tijeras', 15000, 30),
-(2, 'Afeitado de barba', 'Afeitado completo con toalla caliente', 10000, 20),
-(3, 'Perfilado de barba', 'Definición y perfilado con máquina y navaja', 12000, 25),
-(4, 'Tinte de cabello', 'Aplicación de tinte para cubrir canas o dar color', 25000, 40),
-(5, 'Limpieza facial', 'Tratamiento básico de limpieza facial para hombres', 20000, 30),
-(6, 'Corte + barba', 'Combo de corte de cabello y barba', 22000, 50),
-(7, 'Diseño de cejas', 'Diseño y depilación de cejas con navaja', 8000, 10),
-(8, 'Tratamiento capilar', 'Tratamiento nutritivo o anticaspa', 18000, 35);
-
 -- --------------------------------------------------------
 
 --
@@ -151,12 +113,9 @@ INSERT INTO `servicios` (`id_servicio`, `nombre`, `descripcion`, `precio`, `dura
 
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rol` varchar(50) NOT NULL,
-  `estado` varchar(20) DEFAULT 'Activo',
   `fecha_creacion` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -164,10 +123,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `usuario`, `correo`, `password`, `rol`, `estado`, `fecha_creacion`) VALUES
-(1, 'Andres', 'Andres12', 'andres@gmail.com', '123', 'administrador', 'Activo', '2025-05-20 13:50:28'),
-(2, 'Carlos Gómez', 'carlosg', '', 'barbero123', 'barbero', 'Activo', '2025-05-20 13:50:28'),
-(3, 'Ana Torres', 'ana.t', '', 'recepcion1', 'recepcionista', 'Activo', '2025-05-20 13:50:28');
+INSERT INTO `usuarios` (`id_usuario`, `usuario`, `correo`, `password`, `fecha_creacion`) VALUES
+(1, 'Andres12', 'andres@gmail.com', '123', '2025-05-20 13:50:28'),
+(4, 'LasCanelitas', 'nominasena793@gmail.com', 'Lascanelitas2025', '2025-09-20 20:15:04');
 
 --
 -- Índices para tablas volcadas
@@ -228,7 +186,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_reserva`
@@ -240,31 +198,31 @@ ALTER TABLE `detalle_reserva`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `id_promocion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_promocion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
